@@ -34,6 +34,9 @@ LICENSE    text
 *.toml     text eol=lf diff=toml
 Cargo.lock text eol=lf
 
+# Ebooks
+*.epub     binary
+
 # Configs
 .gitattributes text eol=lf
 .gitignore     text eol=lf
