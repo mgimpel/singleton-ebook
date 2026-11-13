@@ -1,0 +1,36 @@
+{
+  "reader": {
+    "loading": "Opening the book…",
+    "openError": "This book could not be opened."
+  },
+  "toc": {
+    "title": "Table of contents",
+    "empty": "This book has no table of contents.",
+    "unavailable": "That destination is unavailable."
+  },
+  "nav": {
+    "previous": "Previous page",
+    "next": "Next page",
+    "openToc": "Table of contents",
+    "openSettings": "Settings"
+  },
+  "settings": {
+    "title": "Settings",
+    "fontSize": "Font size",
+    "language": "Language",
+    "theme": {
+      "label": "Theme",
+      "system": "System",
+      "light": "Light",
+      "dark": "Dark",
+      "sepia": "Sepia"
+    }
+  },
+  "notice": {
+    "saveFailed": "Your setting couldn't be saved and will reset next time. You can keep reading."
+  },
+  "common": {
+    "close": "Close",
+    "dismiss": "Dismiss"
+  }
+}

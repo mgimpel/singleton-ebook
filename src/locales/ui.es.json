@@ -1,0 +1,36 @@
+{
+  "reader": {
+    "loading": "Abriendo el libro…",
+    "openError": "No se pudo abrir este libro."
+  },
+  "toc": {
+    "title": "Índice",
+    "empty": "Este libro no tiene índice.",
+    "unavailable": "Ese destino no está disponible."
+  },
+  "nav": {
+    "previous": "Página anterior",
+    "next": "Página siguiente",
+    "openToc": "Índice",
+    "openSettings": "Ajustes"
+  },
+  "settings": {
+    "title": "Ajustes",
+    "fontSize": "Tamaño del texto",
+    "language": "Idioma",
+    "theme": {
+      "label": "Tema",
+      "system": "Sistema",
+      "light": "Claro",
+      "dark": "Oscuro",
+      "sepia": "Sepia"
+    }
+  },
+  "notice": {
+    "saveFailed": "No se pudo guardar tu ajuste y se restablecerá la próxima vez. Puedes seguir leyendo."
+  },
+  "common": {
+    "close": "Cerrar",
+    "dismiss": "Descartar"
+  }
+}

@@ -1,0 +1,30 @@
+/* Full-bleed reader surface: fills the area AppLayout gives it and hosts the
+   live <foliate-view>. The loading/error states center their content over the
+   same surface so the layout never jumps between states. */
+
+.surface {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* The mounted <foliate-view> fills the surface. */
+.surface > :global(foliate-view) {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Centered overlay for the loading and error states. */
+.center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--mantine-spacing-md);
+  text-align: center;
+}

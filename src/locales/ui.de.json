@@ -1,0 +1,36 @@
+{
+  "reader": {
+    "loading": "Buch wird geöffnet…",
+    "openError": "Dieses Buch konnte nicht geöffnet werden."
+  },
+  "toc": {
+    "title": "Inhaltsverzeichnis",
+    "empty": "Dieses Buch hat kein Inhaltsverzeichnis.",
+    "unavailable": "Dieses Ziel ist nicht verfügbar."
+  },
+  "nav": {
+    "previous": "Vorherige Seite",
+    "next": "Nächste Seite",
+    "openToc": "Inhaltsverzeichnis",
+    "openSettings": "Einstellungen"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "fontSize": "Schriftgröße",
+    "language": "Sprache",
+    "theme": {
+      "label": "Thema",
+      "system": "System",
+      "light": "Hell",
+      "dark": "Dunkel",
+      "sepia": "Sepia"
+    }
+  },
+  "notice": {
+    "saveFailed": "Deine Einstellung konnte nicht gespeichert werden und wird beim nächsten Mal zurückgesetzt. Du kannst weiterlesen."
+  },
+  "common": {
+    "close": "Schließen",
+    "dismiss": "Verwerfen"
+  }
+}

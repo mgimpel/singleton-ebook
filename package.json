@@ -4,32 +4,46 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "setup-vendors": "node scripts/setup-vendors.mjs",
+    "predev": "pnpm run setup-vendors",
     "dev": "vite",
+    "prebuild": "pnpm run setup-vendors",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "tauri": "tauri",
     "test": "vitest --run",
     "test:watch": "vitest",
+    "check": "vite-node scripts/run-checks.mts",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix"
   },
   "dependencies": {
+    "@mantine/hooks": "9.8.0",
     "@tauri-apps/api": "2.12.4",
     "@tauri-apps/plugin-opener": "2.7.3",
+    "i18next": "27.1.1",
     "react": "19.3.1",
-    "react-dom": "19.3.1"
+    "react-dom": "19.3.1",
+    "react-i18next": "18.0.1"
   },
   "devDependencies": {
     "@mantine/core": "9.8.0",
     "@tauri-apps/cli": "2.12.4",
+    "@tauri-apps/plugin-os": "2.4.0",
+    "@testing-library/jest-dom": "7.0.1",
+    "@testing-library/react": "16.3.3",
+    "@testing-library/user-event": "14.6.10",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "@vitejs/plugin-react": "6.3.0",
+    "fast-check": "4.10.2",
+    "jsdom": "31.0.1",
     "oxlint": "1.93.0",
     "oxlint-tsgolint": "7.0.2006",
     "postcss": "8.5.32",
     "typescript": "7.0.2",
     "vite": "8.3.8",
+    "vite-node": "6.0.0",
     "vitest": "5.1.0"
   }
 }

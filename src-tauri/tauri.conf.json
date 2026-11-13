@@ -13,12 +13,12 @@
     "windows": [
       {
         "title": "singleton-ebook",
-        "width": 800,
-        "height": 600
+        "width": 600,
+        "height": 800
       }
     ],
     "security": {
-      "csp": null
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data: blob:; connect-src 'self' blob:; frame-src 'self' blob:"
     }
   },
   "bundle": {

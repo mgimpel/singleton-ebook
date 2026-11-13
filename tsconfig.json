@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    // ES2022 is a safe modern target for Tauri/Vite/Node 24 and provides
+    // Array/String .prototype.at() (used in tests) in both target and lib.
+    "target": "ES2022",
     "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM"],
+    "lib": ["ES2022", "DOM"],
     "module": "ESNext",
     "skipLibCheck": true,
 
@@ -21,5 +23,6 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src"],
+  "exclude": ["src/**/*.check.ts", "src/**/__tests__/**"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

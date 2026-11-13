@@ -33,6 +33,10 @@ export default defineConfig({
     "dist",
     "node_modules",
     "src-tauri/target",
+    // Vendored third-party foliate-js sources and their generated public/ mirror
+    // are not ours to lint (upstream ES modules, no build step).
+    "vendor",
+    "public/vendor",
   ],
   overrides: [
     {

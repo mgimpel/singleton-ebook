@@ -1,0 +1,36 @@
+{
+  "reader": {
+    "loading": "Ouverture du livre…",
+    "openError": "Ce livre n'a pas pu être ouvert."
+  },
+  "toc": {
+    "title": "Table des matières",
+    "empty": "Ce livre n'a pas de table des matières.",
+    "unavailable": "Cette destination est indisponible."
+  },
+  "nav": {
+    "previous": "Page précédente",
+    "next": "Page suivante",
+    "openToc": "Table des matières",
+    "openSettings": "Paramètres"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "fontSize": "Taille du texte",
+    "language": "Langue",
+    "theme": {
+      "label": "Thème",
+      "system": "Système",
+      "light": "Clair",
+      "dark": "Sombre",
+      "sepia": "Sépia"
+    }
+  },
+  "notice": {
+    "saveFailed": "Votre réglage n'a pas pu être enregistré et sera réinitialisé la prochaine fois. Vous pouvez continuer votre lecture."
+  },
+  "common": {
+    "close": "Fermer",
+    "dismiss": "Ignorer"
+  }
+}
