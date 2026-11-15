@@ -1,3 +1,6 @@
 [submodule "submodules/foliate-js"]
 	path = submodules/foliate-js
 	url = https://github.com/johnfactotum/foliate-js.git
+[submodule "submodules/anti-slop"]
+	path = submodules/anti-slop
+	url = https://github.com/dmmulroy/anti-slop.git
