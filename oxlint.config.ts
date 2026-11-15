@@ -58,27 +58,6 @@ export default defineConfig({
   ],
   overrides: [
     {
-      // These modules ARE the I/O boundary: they take untrusted `unknown`
-      // (localStorage, foliate-js, TOC payloads) and parse it into domain types,
-      // which is exactly what these anti-slop rules ask for elsewhere.
-      files: [
-        "src/lib/fontSize.ts",
-        "src/lib/language.ts",
-        "src/lib/readerColorScheme.ts",
-        "src/lib/readingLocation.ts",
-        "src/lib/toc.ts",
-        "src/hooks/useBook.ts",
-        "src/hooks/useReaderSettings.ts",
-      ],
-      rules: {
-        "anti-slop/no-runtime-typeof": "off",
-        "anti-slop/no-unknown-parameters": "off",
-        "anti-slop/no-unknown-returns": "off",
-        "anti-slop/no-known-value-widening": "off",
-        "anti-slop/no-unsafe-dictionary-type": "off",
-      },
-    },
-    {
       // Tests/self-checks deliberately fake foliate-js views, mock modules and
       // feed invalid input to the parsers; typed fakes would add no safety.
       files: ["**/__tests__/**", "**/*.check.ts", "src/test-setup.ts"],

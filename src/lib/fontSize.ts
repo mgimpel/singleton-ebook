@@ -11,24 +11,23 @@ export const FONT_SIZE_OPTIONS: readonly number[] = Array.from(
   (_, i) => FONT_SIZE_MIN + i * FONT_SIZE_STEP,
 );
 
+// A requested size (number) or a persisted one (stored as a string; null/absent
+// when nothing is stored).
+export type FontSizeInput = number | string | null | undefined;
+
 /**
- * Coerce an unknown value to a finite number, or null if it isn't one.
- * Accepts numbers and numeric strings (the persisted value is stored as a
- * string). Empty/whitespace strings, null, undefined, and non-numeric strings
- * are rejected — so they fall through to the default rather than becoming 0.
+ * Coerce a size input to a finite number, or null if it isn't one.
+ * Empty/whitespace strings, null, undefined, and non-numeric strings are
+ * rejected — so they fall through to the default rather than becoming 0.
  */
-function toFiniteNumber(value: unknown): number | null {
-  if (typeof value === "number") {
-    return Number.isFinite(value) ? value : null;
+function toFiniteNumber(value: FontSizeInput): number | null {
+  if (value == null || String(value).trim() === "") {
+    return null;
   }
 
-  if (typeof value === "string" && value.trim() !== "") {
-    const n = Number(value);
+  const n = Number(value);
 
-    return Number.isFinite(n) ? n : null;
-  }
-
-  return null;
+  return Number.isFinite(n) ? n : null;
 }
 
 /**
@@ -37,7 +36,7 @@ function toFiniteNumber(value: unknown): number | null {
  * nearest bound, snaps in-range values to the nearest 2px step (ties round up),
  * and returns FONT_SIZE_DEFAULT for absent/non-numeric input.
  */
-export function normalizeFontSize(value: unknown): number {
+export function normalizeFontSize(value: FontSizeInput): number {
   const n = toFiniteNumber(value);
 
   if (n === null) {

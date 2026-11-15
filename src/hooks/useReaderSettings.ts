@@ -8,7 +8,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { normalizeFontSize } from "../lib/fontSize";
+import { normalizeFontSize, type FontSizeInput } from "../lib/fontSize";
 import {
   normalizeReaderColorScheme,
   resolveReaderScheme,
@@ -36,18 +36,18 @@ const DARK_QUERY = "(prefers-color-scheme: dark)";
 // Read the device dark preference, tolerating a matchMedia that is absent
 // (non-browser) or a never-matching polyfill (jsdom): default to false.
 function readDeviceIsDark(): boolean {
-  if (typeof matchMedia !== "function") {
+  if (window.matchMedia === undefined) {
     return false;
   }
 
-  return matchMedia(DARK_QUERY).matches;
+  return window.matchMedia(DARK_QUERY).matches;
 }
 
 export interface UseReaderSettingsResult {
   fontSize: number;
   readerScheme: ReaderColorScheme;
-  setFontSize: (value: unknown) => void;
-  setReaderScheme: (value: unknown) => void;
+  setFontSize: (value: FontSizeInput) => void;
+  setReaderScheme: (value: string) => void;
 }
 
 export function useReaderSettings(
@@ -70,13 +70,13 @@ export function useReaderSettings(
     onSaveErrorRef.current = onSaveError;
   }, [onSaveError]);
 
-  const setFontSize = useCallback((value: unknown) => {
+  const setFontSize = useCallback((value: FontSizeInput) => {
     const next = normalizeFontSize(value);
     setFontSizeState(next);
     persistFontSize(next, onSaveErrorRef.current);
   }, []);
 
-  const setReaderScheme = useCallback((value: unknown) => {
+  const setReaderScheme = useCallback((value: string) => {
     const next = normalizeReaderColorScheme(value);
     setReaderSchemeState(next);
     persistReaderScheme(next, onSaveErrorRef.current);
@@ -101,11 +101,11 @@ export function useReaderSettings(
   // effect), which re-runs the apply effect above. Unsubscribe on a concrete
   // choice or unmount.
   useEffect(() => {
-    if (readerScheme !== "system" || typeof matchMedia !== "function") {
+    if (readerScheme !== "system" || window.matchMedia === undefined) {
       return;
     }
 
-    const mql = matchMedia(DARK_QUERY);
+    const mql = window.matchMedia(DARK_QUERY);
     const onChange = () => setDeviceDarkTick((t) => t + 1);
     mql.addEventListener("change", onChange);
 

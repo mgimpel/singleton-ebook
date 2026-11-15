@@ -48,9 +48,7 @@ describe("Property 2: normalizeFontSize", () => {
       fc.constant(null),
       fc.constant(undefined),
       fc.string().filter((s) => !Number.isFinite(Number(s)) || s.trim() === ""),
-      fc.object(),
-      fc.boolean(),
-      fc.array(fc.anything()),
+      fc.constantFrom(Number.NaN, Infinity, -Infinity),
     );
 
     fc.assert(

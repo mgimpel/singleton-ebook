@@ -6,16 +6,15 @@ export const UI_LANGUAGES: readonly UI_Language[] = ["en", "fr", "es", "de"] as 
 
 export const DEFAULT_LANGUAGE: UI_Language = "en";
 
-function isUILanguage(value: unknown): value is UI_Language {
-  // SAFETY: widening to string[] only to call includes on a value already checked as a string.
-  return typeof value === "string" && (UI_LANGUAGES as readonly string[]).includes(value);
+function isUILanguage(value: string | null | undefined): value is UI_Language {
+  return UI_LANGUAGES.some((lang) => lang === value);
 }
 
 /**
  * Returns the value unchanged if it is a bundled locale, else the default ("en").
- * Total: handles any unknown input (non-string, null, undefined).
+ * Total: handles absent input (null, undefined).
  */
-export function normalizeLanguage(value: unknown): UI_Language {
+export function normalizeLanguage(value: string | null | undefined): UI_Language {
   return isUILanguage(value) ? value : DEFAULT_LANGUAGE;
 }
 
@@ -29,19 +28,17 @@ export function normalizeLanguage(value: unknown): UI_Language {
  * The result is always a member of UI_LANGUAGES.
  */
 export function resolveLanguage(
-  persisted: unknown,
+  persisted: string | null | undefined,
   deviceLanguage: string | null | undefined,
 ): UI_Language {
   if (isUILanguage(persisted)) {
     return persisted;
   }
 
-  if (typeof deviceLanguage === "string") {
-    const primary = deviceLanguage.toLowerCase().split(/[-_]/)[0];
+  const primary = deviceLanguage?.toLowerCase().split(/[-_]/)[0];
 
-    if (isUILanguage(primary)) {
-      return primary;
-    }
+  if (isUILanguage(primary)) {
+    return primary;
   }
 
   return DEFAULT_LANGUAGE;

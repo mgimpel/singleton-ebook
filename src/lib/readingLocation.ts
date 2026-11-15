@@ -18,8 +18,10 @@ const CFI_PATTERN = /^epubcfi\(.+\)$/;
  * (`epubcfi(...)`). Rejects empty, malformed, and non-string input.
  * Shape-only — it does not validate CFI internals.
  */
-export function isValidReadingLocation(value: unknown): value is ReadingLocation {
-  return typeof value === "string" && CFI_PATTERN.test(value);
+export function isValidReadingLocation(
+  value: string | null | undefined,
+): value is ReadingLocation {
+  return value != null && CFI_PATTERN.test(value);
 }
 
 /**

@@ -22,16 +22,15 @@ export const READER_SCHEME_COLORS: Record<ConcreteReaderScheme, { fg: string; bg
   sepia: { fg: "#5b4636", bg: "#f4ecd8" },
 };
 
-function isReaderColorScheme(value: unknown): value is ReaderColorScheme {
-  // SAFETY: widening to string[] only to call includes on a value already checked as a string.
-  return typeof value === "string" && (READER_COLOR_SCHEMES as readonly string[]).includes(value);
+function isReaderColorScheme(value: string | null | undefined): value is ReaderColorScheme {
+  return READER_COLOR_SCHEMES.some((scheme) => scheme === value);
 }
 
 /**
  * Returns the value unchanged if it is a valid scheme, else the default
- * ("system"). Total: handles any unknown input (non-string, null, undefined).
+ * ("system"). Total: handles absent input (null, undefined).
  */
-export function normalizeReaderColorScheme(value: unknown): ReaderColorScheme {
+export function normalizeReaderColorScheme(value: string | null | undefined): ReaderColorScheme {
   return isReaderColorScheme(value) ? value : DEFAULT_READER_COLOR_SCHEME;
 }
 

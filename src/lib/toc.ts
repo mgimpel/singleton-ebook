@@ -6,8 +6,15 @@ export interface TocEntry {
   subitems: TocEntry[];
 }
 
-function isNonEmptyString(value: unknown): value is string {
-  return typeof value === "string" && value.length > 0;
+// The raw foliate `book.toc` item: every field may be missing or malformed.
+export interface RawTocItem {
+  label?: string;
+  href?: string;
+  subitems?: readonly RawTocItem[];
+}
+
+function isNonEmptyString(value: string | undefined): value is string {
+  return value !== undefined && value.length > 0;
 }
 
 /**
@@ -27,14 +34,13 @@ function isNonEmptyString(value: unknown): value is string {
  *   entry's children stay at the same depth beneath it. This keeps the walk a
  *   simple recursive filter rather than re-parenting orphaned children.
  */
-export function normalizeToc(raw: unknown): TocEntry[] {
+export function normalizeToc(raw: readonly RawTocItem[] | null | undefined): TocEntry[] {
   if (!Array.isArray(raw)) return [];
   const result: TocEntry[] = [];
 
   for (const item of raw) {
-    if (item == null || typeof item !== "object") continue;
-    // SAFETY: item was just checked to be a non-null object.
-    const { label, href, subitems } = item as Record<string, unknown>;
+    // A null/primitive item destructures to all-undefined and is dropped below.
+    const { label, href, subitems } = item ?? {};
 
     if (!isNonEmptyString(label) || !isNonEmptyString(href)) continue;
     result.push({ label, href, subitems: normalizeToc(subitems) });

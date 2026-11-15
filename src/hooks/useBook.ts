@@ -16,7 +16,7 @@ import {
   readReaderScheme,
   readReadingLocation,
 } from "../lib/persistenceManager";
-import { normalizeToc, type TocEntry } from "../lib/toc";
+import { normalizeToc, type RawTocItem, type TocEntry } from "../lib/toc";
 
 export type BookStatus = "loading" | "ready" | "error";
 
@@ -28,12 +28,13 @@ export type BookStatus = "loading" | "ready" | "error";
  */
 export interface FoliateView extends HTMLElement {
   open(book: Blob): Promise<void>;
-  goTo(target: string | number): Promise<unknown>;
+  // Resolves to the destination, or undefined when it can't be resolved.
+  goTo(target: string | number): Promise<object | null | undefined>;
   next(): Promise<void>;
   prev(): Promise<void>;
   goLeft(): Promise<void> | void;
   goRight(): Promise<void> | void;
-  book?: { toc?: unknown };
+  book?: { toc?: readonly RawTocItem[] };
   // The renderer is a real element (<foliate-paginator>): setStyles injects the
   // user stylesheet, and flow/gap/etc. are plain attributes read off it.
   renderer?: { setStyles(css: string): void; setAttribute(name: string, value: string): void };
@@ -125,8 +126,8 @@ export function useBook(container: HTMLElement | null): UseBookResult {
         // Apply the initial font size + resolved reader scheme before the first
         // paint (Req 4.5, 5.7, 5.8, 7.4). useReaderSettings takes over changes.
         const deviceIsDark =
-          typeof matchMedia === "function" &&
-          matchMedia("(prefers-color-scheme: dark)").matches;
+          window.matchMedia !== undefined &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
 
         el.renderer?.setStyles(
           buildReaderStyles(readFontSize(), resolveReaderScheme(readReaderScheme(), deviceIsDark)),
