@@ -51,7 +51,6 @@ export interface UseBookResult {
 }
 
 const OPEN_TIMEOUT_MS = 10_000;
-const VIEW_MODULE_URL = "/vendor/foliate-js/view.js";
 const READING_LOCATION_KEY = "ebook:readingLocation";
 
 /** Reject after `ms`, so a hung open() surfaces as an error (Req 1.7). */
@@ -95,8 +94,7 @@ export function useBook(container: HTMLElement | null): UseBookResult {
     async function load(host: HTMLElement) {
       try {
         // Importing view.js registers the <foliate-view> custom element.
-        // @vite-ignore: load the vendored copy by absolute URL at runtime.
-        await import(/* @vite-ignore */ VIEW_MODULE_URL);
+        await import("../vendor/foliate-js/view.js");
 
         const res = await fetch(bookUrl);
         // foliate-js detects format from the file name/type (isCBZ/isFBZ/isFB2

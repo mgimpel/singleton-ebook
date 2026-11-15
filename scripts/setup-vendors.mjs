@@ -1,5 +1,5 @@
-// Mirrors the committed foliate-js sources into public/ so Vite serves them
-// unprocessed and Tauri bundles them with the app. Runs from predev/prebuild.
+// Mirrors the committed foliate-js sources into src/vendor/ so Vite bundles them
+// with the app. Runs from predev/prebuild.
 //
 // Idempotent copy-if-newer: a file is (re)copied only when it is missing from
 // the destination or its source mtime is newer, so repeated runs are cheap.
@@ -13,8 +13,8 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const srcRoot = join(projectRoot, "vendor", "foliate-js");
-const destRoot = join(projectRoot, "public", "vendor", "foliate-js");
+const srcRoot = join(projectRoot, "submodules", "foliate-js");
+const destRoot = join(projectRoot, "src", "vendor", "foliate-js");
 
 async function mtime(path) {
   try {
@@ -47,7 +47,7 @@ const srcExists = (await mtime(srcRoot)) !== undefined;
 if (!srcExists) {
   console.error(
     `setup-vendors: missing source tree at ${srcRoot}. ` +
-      "Vendor foliate-js there (see vendor/foliate-js/VERSION) before building.",
+      "Vendor foliate-js there (see submodules/foliate-js/VERSION) before building.",
   );
   process.exit(1);
 }
@@ -63,6 +63,6 @@ if ((await mtime(destRoot)) !== undefined) {
 const copied = await mirror(srcRoot, destRoot);
 console.log(
   copied === 0
-    ? "setup-vendors: public/vendor/foliate-js already up to date."
-    : `setup-vendors: copied ${copied} file(s) into public/vendor/foliate-js.`,
+    ? "setup-vendors: src/vendor/foliate-js already up to date."
+    : `setup-vendors: copied ${copied} file(s) into src/vendor/foliate-js.`,
 );

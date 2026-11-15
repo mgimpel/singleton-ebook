@@ -17,8 +17,8 @@ import { MantineProvider } from "@mantine/core";
 import { I18nextProvider } from "react-i18next";
 
 // The hook dynamically imports this absolute URL; the real vendored module only
-// exists under public/ at runtime. Resolve import() to a no-op module.
-vi.mock("/vendor/foliate-js/view.js", () => ({}));
+// exists under src/vendor/ at runtime. Resolve import() to a no-op module.
+vi.mock("../../vendor/foliate-js/view.js", () => ({}));
 
 // Keep the wiring hooks inert — they touch a live foliate view's event streams
 // we don't drive here. useBook itself stays REAL (that's the point).

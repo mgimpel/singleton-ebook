@@ -14,9 +14,9 @@ import { MantineProvider } from "@mantine/core";
 import { I18nextProvider } from "react-i18next";
 
 // useBook dynamically imports this absolute URL; the real vendored module only
-// exists under public/ at runtime. Resolve it to a no-op (its only job is
+// exists under src/vendor/ at runtime. Resolve it to a no-op (its only job is
 // registering the custom element, which we bypass via createElement below).
-vi.mock("/vendor/foliate-js/view.js", () => ({}));
+vi.mock("../../vendor/foliate-js/view.js", () => ({}));
 
 // Isolate navigation: the location/settings hooks touch a live foliate view's
 // relocate events / renderer.setStyles we don't exercise here. useBook and

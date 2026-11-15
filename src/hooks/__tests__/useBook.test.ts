@@ -11,9 +11,9 @@ import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { act, renderHook, waitFor } from "@testing-library/react";
 
 // The hook dynamically imports this absolute URL; the real vendored module only
-// exists under public/ at runtime. Mock the specifier so import() resolves to a
+// exists under src/vendor/ at runtime. Mock the specifier so import() resolves to a
 // no-op (its only job is registering the custom element, which we bypass).
-vi.mock("/vendor/foliate-js/view.js", () => ({}));
+vi.mock("../../vendor/foliate-js/view.js", () => ({}));
 
 import { useBook } from "../useBook";
 import type { FoliateView } from "../useBook";
