@@ -29,7 +29,9 @@ export function createAppColorSchemeManager(): MantineColorSchemeManager {
       const deviceIsDark =
         typeof window !== "undefined" &&
         window.matchMedia("(prefers-color-scheme: dark)").matches;
+
       const concrete = resolveReaderScheme(readReaderScheme(), deviceIsDark);
+
       // sepia chrome uses the light palette (design: sepia -> Mantine light).
       return concrete === "dark" ? "dark" : "light";
     },

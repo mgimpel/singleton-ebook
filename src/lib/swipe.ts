@@ -15,5 +15,6 @@ export function classifySwipe(dx: number, dy: number): SwipeDirection {
   if (Math.abs(dx) < SWIPE_THRESHOLD || Math.abs(dx) <= Math.abs(dy)) {
     return "none";
   }
+
   return dx < 0 ? "next" : "prev";
 }

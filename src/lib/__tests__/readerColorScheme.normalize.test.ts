@@ -32,6 +32,7 @@ describe("Property 4: normalizeReaderColorScheme", () => {
     const invalid = fc
       .anything()
       .filter((v) => !(READER_COLOR_SCHEMES as readonly unknown[]).includes(v));
+
     fc.assert(
       fc.property(invalid, (value) => {
         expect(normalizeReaderColorScheme(value)).toBe(DEFAULT_READER_COLOR_SCHEME);

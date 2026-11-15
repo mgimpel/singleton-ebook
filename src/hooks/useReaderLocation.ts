@@ -73,11 +73,13 @@ export function useReaderLocation(
         write: (cfi) => persistReadingLocation(cfi, onSaveErrorRef.current),
       });
     }
+
     const writer = writerRef.current;
 
     const handler = (event: CustomEvent<RelocateDetail>): void => {
       const { fraction, cfi } = event.detail;
       setLocation({ fraction, cfi: cfi ?? null });
+
       // Only persist valid CFIs — persistReadingLocation stores via
       // serializeReadingLocation which assumes a CFI; skip null/malformed.
       if (isValidReadingLocation(cfi)) {
@@ -86,6 +88,7 @@ export function useReaderLocation(
     };
 
     view.addEventListener("relocate", handler);
+
     return () => view.removeEventListener("relocate", handler);
     // ponytail: a trailing coalesced write may fire shortly after unmount; it
     // is a harmless localStorage write, so we do not expose a cancel hook.

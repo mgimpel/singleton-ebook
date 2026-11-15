@@ -37,9 +37,11 @@ describe("useSwipeNavigation", () => {
     document.body.appendChild(el);
     const next = vi.fn();
     const prev = vi.fn();
+
     const { unmount } = renderHook(() =>
       useSwipeNavigation(el, { next, prev }),
     );
+
     return { next, prev, unmount };
   }
 

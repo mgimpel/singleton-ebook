@@ -21,6 +21,7 @@ function renderControls(
     onOpenToc: vi.fn(),
     onOpenSettings: vi.fn(),
   };
+
   render(
     <I18nextProvider i18n={i18n}>
       <MantineProvider>
@@ -28,6 +29,7 @@ function renderControls(
       </MantineProvider>
     </I18nextProvider>,
   );
+
   return handlers;
 }
 
@@ -35,6 +37,7 @@ describe("ReaderControls", () => {
   // Each button carries its i18n aria-label (Req 2.2 next, 2.3 prev, 3.1 toc).
   it("exposes an accessible name for each button", () => {
     renderControls();
+
     for (const name of [
       labels.previous,
       labels.next,
@@ -59,6 +62,7 @@ describe("ReaderControls", () => {
     );
 
     expect(handlers[handlerKey]).toHaveBeenCalledTimes(1);
+
     for (const [key, fn] of Object.entries(handlers)) {
       if (key !== handlerKey) expect(fn).not.toHaveBeenCalled();
     }

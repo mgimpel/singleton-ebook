@@ -69,6 +69,7 @@ export default function TocPanel({
 
   const handleSelect = async (href: string) => {
     const resolved = await goTo(href);
+
     if (resolved) {
       handleClose();
     } else {

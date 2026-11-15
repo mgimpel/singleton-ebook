@@ -30,11 +30,15 @@ function isNonEmptyString(value: unknown): value is string {
 export function normalizeToc(raw: unknown): TocEntry[] {
   if (!Array.isArray(raw)) return [];
   const result: TocEntry[] = [];
+
   for (const item of raw) {
     if (item == null || typeof item !== "object") continue;
+    // SAFETY: item was just checked to be a non-null object.
     const { label, href, subitems } = item as Record<string, unknown>;
+
     if (!isNonEmptyString(label) || !isNonEmptyString(href)) continue;
     result.push({ label, href, subitems: normalizeToc(subitems) });
   }
+
   return result;
 }

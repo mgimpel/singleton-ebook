@@ -11,6 +11,7 @@ function expected(dx: number, dy: number): SwipeDirection {
   if (Math.abs(dx) >= SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
     return dx < 0 ? "next" : "prev";
   }
+
   return "none";
 }
 
@@ -46,6 +47,7 @@ describe("Property 1: Swipe classification maps gesture to navigation direction"
     fc.assert(
       fc.property(nearThreshold, sign, fc.integer({ min: 0, max: 60 }), (mag, s, dyMag) => {
         const dx = mag * s;
+
         // exercise dy both below and at/above |dx| to hit the dominance tie
         for (const dy of [dyMag, -dyMag, Math.abs(dx), -Math.abs(dx)]) {
           expect(classifySwipe(dx, dy)).toBe(expected(dx, dy));

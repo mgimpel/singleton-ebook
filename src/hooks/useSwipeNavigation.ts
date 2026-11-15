@@ -34,6 +34,7 @@ export function useSwipeNavigation(
 
     const onTouchStart = (event: TouchEvent) => {
       const touch = event.changedTouches[0];
+
       if (!touch) return;
       startX = touch.clientX;
       startY = touch.clientY;
@@ -41,8 +42,10 @@ export function useSwipeNavigation(
 
     const onTouchEnd = (event: TouchEvent) => {
       const touch = event.changedTouches[0];
+
       if (!touch) return;
       const direction = classifySwipe(touch.clientX - startX, touch.clientY - startY);
+
       if (direction === "next") handlersRef.current.next();
       else if (direction === "prev") handlersRef.current.prev();
     };

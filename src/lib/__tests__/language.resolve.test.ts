@@ -59,6 +59,7 @@ test("Property 13 (3): invalid persisted + non-matching device subtag resolves t
   const nonMatchingDevice = fc
     .string()
     .filter((s) => !(UI_LANGUAGES as readonly string[]).includes(s.toLowerCase().split(/[-_]/)[0] ?? ""));
+
   fc.assert(
     fc.property(invalidPersisted, nonMatchingDevice, (persisted, device) => {
       const result = resolveLanguage(persisted, device);

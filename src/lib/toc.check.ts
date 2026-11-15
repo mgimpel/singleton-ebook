@@ -37,8 +37,11 @@ const nested = normalizeToc([
     subitems: [{ label: "Section 1.1", href: "s1-1.xhtml" }],
   },
 ]);
+
 assert.ok(Array.isArray(nested));
+
 assert.ok(Array.isArray(nested[0].subitems));
+
 assert.deepEqual(nested, [
   {
     label: "Part I",

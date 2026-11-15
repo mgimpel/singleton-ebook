@@ -21,10 +21,13 @@ function toFiniteNumber(value: unknown): number | null {
   if (typeof value === "number") {
     return Number.isFinite(value) ? value : null;
   }
+
   if (typeof value === "string" && value.trim() !== "") {
     const n = Number(value);
+
     return Number.isFinite(n) ? n : null;
   }
+
   return null;
 }
 
@@ -36,17 +39,22 @@ function toFiniteNumber(value: unknown): number | null {
  */
 export function normalizeFontSize(value: unknown): number {
   const n = toFiniteNumber(value);
+
   if (n === null) {
     return FONT_SIZE_DEFAULT;
   }
+
   if (n <= FONT_SIZE_MIN) {
     return FONT_SIZE_MIN;
   }
+
   if (n >= FONT_SIZE_MAX) {
     return FONT_SIZE_MAX;
   }
+
   // Snap to the nearest step. Math.round breaks .5 ties upward, consistently.
   const steps = Math.round((n - FONT_SIZE_MIN) / FONT_SIZE_STEP);
+
   return FONT_SIZE_MIN + steps * FONT_SIZE_STEP;
 }
 
@@ -57,5 +65,6 @@ export function normalizeFontSize(value: unknown): number {
 export function stepFontSize(value: number, direction: 1 | -1): number {
   const current = normalizeFontSize(value);
   const next = current + direction * FONT_SIZE_STEP;
+
   return Math.min(FONT_SIZE_MAX, Math.max(FONT_SIZE_MIN, next));
 }

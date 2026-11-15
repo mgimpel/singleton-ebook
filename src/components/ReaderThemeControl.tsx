@@ -27,16 +27,19 @@ export default function ReaderThemeControl({
   onChange,
 }: ReaderThemeControlProps) {
   const { t } = useTranslation("ui");
+
   const data = READER_COLOR_SCHEMES.map((scheme) => ({
     value: scheme,
     label: t(`settings.theme.${scheme}`),
   }));
+
   return (
     <Input.Wrapper label={t("settings.theme.label")}>
       <SegmentedControl
         fullWidth
         data={data}
         value={value}
+        // SAFETY: option values come only from `data`, built from ReaderColorScheme values.
         onChange={(v) => onChange(v as ReaderColorScheme)}
       />
     </Input.Wrapper>

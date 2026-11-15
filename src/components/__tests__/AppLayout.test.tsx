@@ -42,6 +42,7 @@ vi.mock("../ReaderView", () => ({
         setReaderScheme: vi.fn(),
       });
     }, [onController]);
+
     return (
       <button type="button" onClick={() => onSaveError("fontSize")}>
         trigger-save-error

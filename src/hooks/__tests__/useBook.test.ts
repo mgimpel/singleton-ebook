@@ -60,6 +60,7 @@ function makeView(overrides: Partial<MockView> = {}): MockView {
 function makeContainer(): HTMLElement {
   const host = document.createElement("div");
   vi.spyOn(host, "append").mockImplementation(() => {});
+
   return host;
 }
 
@@ -83,6 +84,7 @@ beforeEach(() => {
     options?: ElementCreationOptions,
   ) => {
     if (tag === "foliate-view") return currentView as unknown as HTMLElement;
+
     return realCreate(tag, options);
   }) as typeof document.createElement);
 });
@@ -172,11 +174,13 @@ describe("useBook — persisted location restore", () => {
 
   test("an unresolvable persisted CFI falls back to goTo(0) and is discarded (Req 1.4, 6.4)", async () => {
     localStorage.setItem(READING_LOCATION_KEY, VALID_CFI);
+
     // goTo(cfi) -> undefined (can't resolve); goTo(0) -> a destination.
     const goTo = vi
       .fn()
       .mockResolvedValueOnce(undefined)
       .mockResolvedValueOnce({ index: 0 });
+
     currentView = makeView({ goTo });
 
     const { result } = renderHook((c) => useBook(c), { initialProps: makeContainer() });

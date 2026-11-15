@@ -49,6 +49,7 @@ export default function SettingsPanel({
   returnFocusRef,
 }: SettingsPanelProps) {
   const { t } = useTranslation("ui");
+
   return (
     <ResponsiveOverlay
       opened={opened}

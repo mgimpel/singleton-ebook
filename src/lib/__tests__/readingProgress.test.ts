@@ -18,6 +18,7 @@ describe("Property 9: reading progress clamp/format", () => {
         const clamped = clampFraction(fraction);
         expect(clamped).toBeGreaterThanOrEqual(0);
         expect(clamped).toBeLessThanOrEqual(1);
+
         if (Number.isNaN(fraction)) expect(clamped).toBe(0);
       }),
       { numRuns: 200 },

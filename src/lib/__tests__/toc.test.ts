@@ -18,6 +18,7 @@ function validTreeAt(depth: number): fc.Arbitrary<ValidRaw> {
     depth <= 0
       ? fc.constant<ValidRaw[]>([])
       : fc.array(validTreeAt(depth - 1), { maxLength: 3 });
+
   return fc.record({ label: nonEmpty, href: nonEmpty, junk: fc.integer(), subitems });
 }
 
@@ -38,12 +39,14 @@ function expectedFromValid(nodes: ValidRaw[]): TocEntry[] {
 // assert the structural invariants hold for whatever survives.
 const maybeLabel = fc.oneof(nonEmpty, fc.constant(""), fc.constant(undefined), fc.integer());
 const maybeHref = fc.oneof(nonEmpty, fc.constant(""), fc.constant(undefined), fc.integer());
+
 const maybeSubitems = (sub: fc.Arbitrary<unknown>) =>
   fc.oneof(fc.array(sub, { maxLength: 3 }), fc.constant(undefined), fc.constant(null), fc.integer(), fc.string());
 
 // Bounded-depth recursion (max depth 3) to keep generation fast and finite.
 function mixedTreeAt(depth: number): fc.Arbitrary<unknown> {
   const sub = depth <= 0 ? fc.constant(undefined) : mixedTreeAt(depth - 1);
+
   return fc.oneof(
     // object-ish node with possibly-valid/invalid fields
     fc.record({
@@ -73,6 +76,7 @@ const mixedRaw = fc.oneof(
 // an array subitems.
 function assertInvariants(entries: TocEntry[]): void {
   expect(Array.isArray(entries)).toBe(true);
+
   for (const e of entries) {
     expect(typeof e.label).toBe("string");
     expect(e.label.length).toBeGreaterThan(0);

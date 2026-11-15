@@ -16,6 +16,7 @@ function readBuildInfo(): { commit: string; date: string } | null {
   try {
     const commit = execSync("git log -1 --format=%h").toString().trim();
     const date = execSync("git log -1 --format=%cs").toString().trim();
+
     return { commit, date };
   } catch {
     return null;

@@ -20,6 +20,7 @@ function makeFakeView(): {
   listenerCount: () => number;
 } {
   const listeners = new Set<(event: CustomEvent) => void>();
+
   const view: FoliateView = {
     addEventListener: (_type, listener) => {
       listeners.add(listener as (event: CustomEvent) => void);
@@ -28,10 +29,12 @@ function makeFakeView(): {
       listeners.delete(listener as (event: CustomEvent) => void);
     },
   };
+
   return {
     view,
     emit: (fraction, cfi) => {
       const event = { detail: { fraction, cfi } } as CustomEvent;
+
       for (const listener of listeners) listener(event);
     },
     listenerCount: () => listeners.size,

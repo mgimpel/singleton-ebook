@@ -41,6 +41,7 @@ export default function AppLayout() {
 
   // One notice at a time: the latest save failure wins. Null = nothing shown.
   const [notice, setNotice] = useState<SaveErrorKind | null>(null);
+
   // Stable so ReaderView's onController/useReaderSettings deps don't churn.
   const handleSaveError = useCallback((kind: SaveErrorKind) => {
     setNotice(kind);

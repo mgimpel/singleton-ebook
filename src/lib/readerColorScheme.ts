@@ -23,6 +23,7 @@ export const READER_SCHEME_COLORS: Record<ConcreteReaderScheme, { fg: string; bg
 };
 
 function isReaderColorScheme(value: unknown): value is ReaderColorScheme {
+  // SAFETY: widening to string[] only to call includes on a value already checked as a string.
   return typeof value === "string" && (READER_COLOR_SCHEMES as readonly string[]).includes(value);
 }
 
@@ -45,5 +46,6 @@ export function resolveReaderScheme(
   if (scheme === "system") {
     return deviceIsDark ? "dark" : "light";
   }
+
   return scheme;
 }

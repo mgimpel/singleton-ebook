@@ -25,6 +25,7 @@ try {
   // Not running under Tauri; no OS tag.
 }
 
+// SAFETY: index.html always contains the #root element.
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <App />

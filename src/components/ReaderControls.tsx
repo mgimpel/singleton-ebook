@@ -31,6 +31,7 @@ export default function ReaderControls({
   settingsButtonRef,
 }: ReaderControlsProps) {
   const { t } = useTranslation("ui");
+
   return (
     <Group gap="xs" wrap="nowrap">
       <ActionIcon

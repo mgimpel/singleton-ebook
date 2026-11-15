@@ -52,6 +52,7 @@ describe("Property 2: normalizeFontSize", () => {
       fc.boolean(),
       fc.array(fc.anything()),
     );
+
     fc.assert(
       fc.property(nonNumeric, (value) => {
         expect(normalizeFontSize(value)).toBe(FONT_SIZE_DEFAULT);

@@ -8,9 +8,11 @@ import { glob } from "node:fs/promises";
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
 const checks: string[] = [];
+
 for await (const file of glob("src/**/*.check.ts", { cwd: projectRoot })) {
   checks.push(file);
 }
+
 checks.sort();
 
 if (checks.length === 0) {
@@ -20,5 +22,6 @@ if (checks.length === 0) {
     await import(resolve(projectRoot, file));
     console.log(`ok  ${file}`);
   }
+
   console.log(`\n${checks.length} self-check(s) passed.`);
 }

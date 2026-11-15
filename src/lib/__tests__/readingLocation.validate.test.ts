@@ -9,12 +9,12 @@ import { isValidReadingLocation, parseReadingLocation } from "../readingLocation
 // newline. Generate inner content from printable-ish strings minus newlines.
 const noNewline = (s: string) => !/[\n\r]/.test(s);
 const innerContent = fc.string({ minLength: 1 }).filter(noNewline);
-const cfiShaped = innerContent.map((inner) => `epubcfi(${inner})`);
+const validCfi = innerContent.map((inner) => `epubcfi(${inner})`);
 
 describe("Property 7: reading-location validation accepts only CFI-shaped strings", () => {
   test("accepts CFI-shaped strings; parse returns the value unchanged", () => {
     fc.assert(
-      fc.property(cfiShaped, (cfi) => {
+      fc.property(validCfi, (cfi) => {
         expect(isValidReadingLocation(cfi)).toBe(true);
         expect(parseReadingLocation(cfi)).toBe(cfi);
       }),

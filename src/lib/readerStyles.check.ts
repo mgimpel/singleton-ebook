@@ -8,6 +8,7 @@ import { buildReaderStyles } from "./readerStyles";
 // For each concrete scheme, the built CSS carries the font size and the
 // resolved scheme's foreground and background colors.
 const schemes: ConcreteReaderScheme[] = ["light", "dark", "sepia"];
+
 for (const scheme of schemes) {
   const css = buildReaderStyles(20, scheme);
   const { fg, bg } = READER_SCHEME_COLORS[scheme];

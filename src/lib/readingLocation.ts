@@ -11,7 +11,7 @@ export type ReadingLocation = string;
 // Shape-only check: a non-empty `epubcfi(...)` wrapper with non-empty content
 // inside. This does NOT validate the CFI internals — resolution within the
 // book is left to foliate-js.
-const CFI_SHAPE = /^epubcfi\(.+\)$/;
+const CFI_PATTERN = /^epubcfi\(.+\)$/;
 
 /**
  * True iff `value` is a non-empty string shaped like an EPUB CFI
@@ -19,7 +19,7 @@ const CFI_SHAPE = /^epubcfi\(.+\)$/;
  * Shape-only — it does not validate CFI internals.
  */
 export function isValidReadingLocation(value: unknown): value is ReadingLocation {
-  return typeof value === "string" && CFI_SHAPE.test(value);
+  return typeof value === "string" && CFI_PATTERN.test(value);
 }
 
 /**

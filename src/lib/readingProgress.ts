@@ -7,7 +7,9 @@
  */
 export function clampFraction(fraction: number): number {
   if (Number.isNaN(fraction) || fraction < 0) return 0;
+
   if (fraction > 1) return 1;
+
   return fraction;
 }
 

@@ -13,6 +13,7 @@ interface ProgressIndicatorProps {
  */
 export default function ProgressIndicator({ fraction }: ProgressIndicatorProps) {
   const percent = formatProgressPercent(fraction);
+
   return (
     <Group gap="xs" wrap="nowrap">
       <Progress

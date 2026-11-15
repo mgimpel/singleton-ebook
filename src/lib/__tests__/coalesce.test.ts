@@ -36,11 +36,13 @@ function run(events: readonly { value: number; dtMs: number }[]) {
   const fireDue = () => {
     for (;;) {
       let idx = -1;
+
       for (let i = 0; i < queue.length; i++) {
         if (queue[i].fireAt <= clock && (idx === -1 || queue[i].fireAt < queue[idx].fireAt)) {
           idx = i;
         }
       }
+
       if (idx === -1) return;
       const [due] = queue.splice(idx, 1);
       due.fn();

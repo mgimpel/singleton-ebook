@@ -46,6 +46,7 @@ export function createCoalescingWriter<T>(
     push(value: T): void {
       const idle = pending === null;
       pending = { value };
+
       // Only the first push in an idle window schedules a flush; later pushes in
       // the same window just update the pending value (last-value-wins), so at
       // most one write fires per window.

@@ -30,11 +30,13 @@ const STORAGE_KEYS = {
  */
 function readPref<T>(key: string, normalize: (raw: string | null) => T): T {
   let raw: string | null = null;
+
   try {
     raw = localStorage.getItem(key);
   } catch {
     raw = null;
   }
+
   return normalize(raw);
 }
 

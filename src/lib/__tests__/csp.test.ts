@@ -13,18 +13,21 @@ const projectRoot = process.cwd();
 
 function readIndexHtmlCsp(): string {
   const html = readFileSync(join(projectRoot, "index.html"), "utf8");
+
   // The meta tag spans multiple lines; [\s\S] matches across newlines.
   // The CSP value contains single quotes ('self'), so match a double-quoted
   // content attribute and capture everything up to the closing double quote.
   const match = html.match(
     /http-equiv="Content-Security-Policy"[\s\S]*?content="([^"]+)"/i,
   );
+
   return match?.[1]?.trim() ?? "";
 }
 
 function readTauriConfCsp(): string {
   const raw = readFileSync(join(projectRoot, "src-tauri", "tauri.conf.json"), "utf8");
   const conf = JSON.parse(raw) as { app?: { security?: { csp?: string } } };
+
   return conf.app?.security?.csp?.trim() ?? "";
 }
 
@@ -34,6 +37,7 @@ function scriptSrc(csp: string): string {
     .split(";")
     .map((d) => d.trim())
     .find((d) => d.toLowerCase().startsWith("script-src"));
+
   return directive ? directive.slice("script-src".length).trim() : "";
 }
 

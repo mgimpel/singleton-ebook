@@ -27,23 +27,28 @@ async function mtime(path) {
 async function mirror(srcDir, destDir) {
   await mkdir(destDir, { recursive: true });
   let copied = 0;
+
   for (const entry of await readdir(srcDir, { withFileTypes: true })) {
     const src = join(srcDir, entry.name);
     const dest = join(destDir, entry.name);
+
     if (entry.isDirectory()) {
       copied += await mirror(src, dest);
     } else {
       const destMtime = await mtime(dest);
+
       if (destMtime === undefined || (await mtime(src)) > destMtime) {
         await cp(src, dest);
         copied += 1;
       }
     }
   }
+
   return copied;
 }
 
 const srcExists = (await mtime(srcRoot)) !== undefined;
+
 if (!srcExists) {
   console.error(
     `setup-vendors: missing source tree at ${srcRoot}. ` +
@@ -55,12 +60,14 @@ if (!srcExists) {
 // Drop a stale mirror whose source is gone so we never serve deleted files.
 if ((await mtime(destRoot)) !== undefined) {
   const current = new Set(await readdir(srcRoot));
+
   for (const name of await readdir(destRoot)) {
     if (!current.has(name)) await rm(join(destRoot, name), { recursive: true, force: true });
   }
 }
 
 const copied = await mirror(srcRoot, destRoot);
+
 console.log(
   copied === 0
     ? "setup-vendors: src/vendor/foliate-js already up to date."

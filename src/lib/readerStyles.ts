@@ -15,5 +15,6 @@ import { READER_SCHEME_COLORS, type ConcreteReaderScheme } from "./readerColorSc
  */
 export function buildReaderStyles(fontSize: number, scheme: ConcreteReaderScheme): string {
   const { fg, bg } = READER_SCHEME_COLORS[scheme];
+
   return `html { font-size: ${fontSize}px; } html, body { color: ${fg}; background: ${bg}; }`;
 }

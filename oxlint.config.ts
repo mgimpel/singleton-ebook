@@ -19,22 +19,22 @@ export default defineConfig({
     "oxc/no-accumulating-spread": "error",
     "anti-slop/no-array-filter-map": "error",
     "anti-slop/no-reduce-accumulator-copy": "error",
-    //"anti-slop/no-chained-type-assertions": "error",
+    "anti-slop/no-chained-type-assertions": "error",
     "anti-slop/no-conditional-empty-object-spread": "error",
-    //"anti-slop/no-known-value-widening": "error",
-    //"anti-slop/no-module-mocking": "error",
+    "anti-slop/no-known-value-widening": "error",
+    "anti-slop/no-module-mocking": "error",
     "anti-slop/no-object-parameters": "error",
     "anti-slop/no-reflect-apply": "error",
     "anti-slop/no-reflect-get": "error",
-    //"anti-slop/no-runtime-typeof": "error",
-    //"anti-slop/no-shape-in-symbol-names": "error",
-    //"anti-slop/no-unknown-parameters": "error",
-    //"anti-slop/no-unknown-returns": "error",
+    "anti-slop/no-runtime-typeof": "error",
+    "anti-slop/no-shape-in-symbol-names": "error",
+    "anti-slop/no-unknown-parameters": "error",
+    "anti-slop/no-unknown-returns": "error",
     "anti-slop/no-unknown-type-aliases": "error",
-    //"anti-slop/no-unsafe-dictionary-type": "error",
+    "anti-slop/no-unsafe-dictionary-type": "error",
     "anti-slop/no-widen-then-assert": "error",
-    //"anti-slop/require-readable-spacing": "error",
-    //"anti-slop/require-safety-comment-for-type-assertion": "error"
+    "anti-slop/require-readable-spacing": "error",
+    "anti-slop/require-safety-comment-for-type-assertion": "error"
   },
   env: {
     browser: true,
@@ -57,6 +57,40 @@ export default defineConfig({
     "src/vendor",
   ],
   overrides: [
+    {
+      // These modules ARE the I/O boundary: they take untrusted `unknown`
+      // (localStorage, foliate-js, TOC payloads) and parse it into domain types,
+      // which is exactly what these anti-slop rules ask for elsewhere.
+      files: [
+        "src/lib/fontSize.ts",
+        "src/lib/language.ts",
+        "src/lib/readerColorScheme.ts",
+        "src/lib/readingLocation.ts",
+        "src/lib/toc.ts",
+        "src/hooks/useBook.ts",
+        "src/hooks/useReaderSettings.ts",
+      ],
+      rules: {
+        "anti-slop/no-runtime-typeof": "off",
+        "anti-slop/no-unknown-parameters": "off",
+        "anti-slop/no-unknown-returns": "off",
+        "anti-slop/no-known-value-widening": "off",
+        "anti-slop/no-unsafe-dictionary-type": "off",
+      },
+    },
+    {
+      // Tests/self-checks deliberately fake foliate-js views, mock modules and
+      // feed invalid input to the parsers; typed fakes would add no safety.
+      files: ["**/__tests__/**", "**/*.check.ts", "src/test-setup.ts"],
+      rules: {
+        "anti-slop/no-module-mocking": "off",
+        "anti-slop/no-chained-type-assertions": "off",
+        "anti-slop/require-safety-comment-for-type-assertion": "off",
+        "anti-slop/no-runtime-typeof": "off",
+        "anti-slop/no-known-value-widening": "off",
+        "anti-slop/no-unsafe-dictionary-type": "off",
+      },
+    },
     {
       files: ["vite.config.ts"],
       rules: {

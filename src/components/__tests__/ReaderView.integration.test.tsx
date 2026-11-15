@@ -25,6 +25,7 @@ vi.mock("../../vendor/foliate-js/view.js", () => ({}));
 vi.mock("../../hooks/useReaderLocation", () => ({
   useReaderLocation: () => ({ fraction: 0, cfi: null }),
 }));
+
 vi.mock("../../hooks/useReaderSettings", () => ({
   useReaderSettings: () => ({
     fontSize: 16,
@@ -33,6 +34,7 @@ vi.mock("../../hooks/useReaderSettings", () => ({
     setReaderScheme: vi.fn(),
   }),
 }));
+
 vi.mock("../../hooks/useSwipeNavigation", () => ({
   useSwipeNavigation: () => undefined,
 }));
@@ -64,6 +66,7 @@ function makeView(): { view: FoliateView; open: ReturnType<typeof vi.fn> } {
     renderer: { setStyles: vi.fn(), setAttribute: vi.fn() },
     book: { toc: [] },
   });
+
   return { view: el as unknown as FoliateView, open };
 }
 
@@ -91,6 +94,7 @@ beforeEach(() => {
     options?: ElementCreationOptions,
   ) => {
     if (tag === "foliate-view") return currentView as unknown as HTMLElement;
+
     return realCreate(tag, options);
   }) as typeof document.createElement);
 });

@@ -23,6 +23,7 @@ function fakeStorage(overrides: Partial<Storage>): Storage {
 }
 
 const original = (globalThis as { localStorage?: Storage }).localStorage;
+
 function installStorage(storage: Storage): void {
   (globalThis as { localStorage?: Storage }).localStorage = storage;
 }

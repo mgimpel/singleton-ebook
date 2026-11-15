@@ -81,6 +81,7 @@ describe("ReaderThemeControl", () => {
     expect(options.map((o) => (o as HTMLInputElement).value)).toEqual([
       ...READER_COLOR_SCHEMES,
     ]);
+
     for (const scheme of READER_COLOR_SCHEMES) {
       expect(
         within(group).getByRole("radio", { name: settings.theme[scheme] }),
@@ -109,6 +110,7 @@ describe("LanguageControl", () => {
   // a11y tree. Query them with { hidden: true } after opening.
   const openAndGetOptions = async (user: ReturnType<typeof userEvent.setup>) => {
     await user.click(screen.getByRole("combobox"));
+
     return screen.findAllByRole("option", { hidden: true });
   };
 

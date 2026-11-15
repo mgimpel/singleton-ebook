@@ -39,6 +39,7 @@ function readDeviceIsDark(): boolean {
   if (typeof matchMedia !== "function") {
     return false;
   }
+
   return matchMedia(DARK_QUERY).matches;
 }
 
@@ -90,6 +91,7 @@ export function useReaderSettings(
     if (view === null) {
       return;
     }
+
     const concrete = resolveReaderScheme(readerScheme, readDeviceIsDark());
     view.renderer?.setStyles(buildReaderStyles(fontSize, concrete));
   }, [view, fontSize, readerScheme, deviceDarkTick]);
@@ -102,9 +104,11 @@ export function useReaderSettings(
     if (readerScheme !== "system" || typeof matchMedia !== "function") {
       return;
     }
+
     const mql = matchMedia(DARK_QUERY);
     const onChange = () => setDeviceDarkTick((t) => t + 1);
     mql.addEventListener("change", onChange);
+
     return () => mql.removeEventListener("change", onChange);
   }, [readerScheme]);
 

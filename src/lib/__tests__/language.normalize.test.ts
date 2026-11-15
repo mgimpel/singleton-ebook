@@ -32,6 +32,7 @@ describe("Property 12: normalizeLanguage", () => {
     const invalid = fc
       .anything()
       .filter((v) => !(UI_LANGUAGES as readonly unknown[]).includes(v));
+
     fc.assert(
       fc.property(invalid, (value) => {
         expect(normalizeLanguage(value)).toBe(DEFAULT_LANGUAGE);

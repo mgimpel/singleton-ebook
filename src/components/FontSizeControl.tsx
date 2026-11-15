@@ -27,6 +27,7 @@ const DATA = FONT_SIZE_OPTIONS.map((n) => String(n));
 export default function FontSizeControl({ value, onChange }: FontSizeControlProps) {
   const { t } = useTranslation("ui");
   const label = t("settings.fontSize");
+
   return (
     <Input.Wrapper label={label}>
       {/* SegmentedControl is a radiogroup, not a single labelable control, so

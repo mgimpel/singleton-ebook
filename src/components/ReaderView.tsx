@@ -72,6 +72,7 @@ export default function ReaderView({ onSaveError, onController }: ReaderViewProp
   const { status, view, toc, next, prev, goTo } = useBook(surface);
 
   const { fraction } = useReaderLocation(view, onSaveError);
+
   // Capture the settings controller (previously discarded) so it can be lifted
   // to AppLayout for SettingsPanel to consume.
   const { fontSize, readerScheme, setFontSize, setReaderScheme } =
@@ -87,7 +88,9 @@ export default function ReaderView({ onSaveError, onController }: ReaderViewProp
       if (event.key === "ArrowRight") next();
       else if (event.key === "ArrowLeft") prev();
     };
+
     window.addEventListener("keydown", onKeyDown);
+
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [next, prev]);
 

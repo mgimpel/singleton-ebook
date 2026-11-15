@@ -97,6 +97,7 @@ export function useBook(container: HTMLElement | null): UseBookResult {
         await import("../vendor/foliate-js/view.js");
 
         const res = await fetch(bookUrl);
+
         // foliate-js detects format from the file name/type (isCBZ/isFBZ/isFB2
         // read `.name` off the file), so it needs a File, not a bare Blob — a
         // Blob has no `name` and `name.endsWith(...)` throws. Give it a .epub name.
@@ -104,6 +105,7 @@ export function useBook(container: HTMLElement | null): UseBookResult {
           type: "application/epub+zip",
         });
 
+        // SAFETY: "foliate-view" is registered by the foliate-js import above.
         const el = document.createElement("foliate-view") as FoliateView;
         // Paginated flow rather than continuous scroll (Req 2.1); the paginator
         // reads `flow` as an attribute on the view before its first render.
@@ -114,6 +116,7 @@ export function useBook(container: HTMLElement | null): UseBookResult {
         mounted = el;
 
         await Promise.race([el.open(file), timeout(OPEN_TIMEOUT_MS)]);
+
         if (cancelled) return;
 
         viewRef.current = el;
@@ -124,6 +127,7 @@ export function useBook(container: HTMLElement | null): UseBookResult {
         const deviceIsDark =
           typeof matchMedia === "function" &&
           matchMedia("(prefers-color-scheme: dark)").matches;
+
         el.renderer?.setStyles(
           buildReaderStyles(readFontSize(), resolveReaderScheme(readReaderScheme(), deviceIsDark)),
         );
@@ -135,8 +139,10 @@ export function useBook(container: HTMLElement | null): UseBookResult {
         // Restore the persisted location, falling back to the first linear
         // section and discarding an unresolvable location (Req 1.2–1.4, 6.2/6.4).
         const persisted = readReadingLocation();
+
         if (persisted != null) {
           const dest = await el.goTo(persisted);
+
           if (dest === undefined) {
             await el.goTo(0);
             clearStoredLocation();
@@ -144,6 +150,7 @@ export function useBook(container: HTMLElement | null): UseBookResult {
         } else {
           await el.goTo(0);
         }
+
         if (cancelled) return;
 
         setStatus("ready");
@@ -155,6 +162,7 @@ export function useBook(container: HTMLElement | null): UseBookResult {
     }
 
     void load(container);
+
     return () => {
       cancelled = true;
       // Remove the element we mounted so a re-run (or unmount) leaves no
@@ -176,6 +184,7 @@ export function useBook(container: HTMLElement | null): UseBookResult {
 
   const goTo = useCallback(async (target: string | number): Promise<boolean> => {
     const dest = await viewRef.current?.goTo(target);
+
     return dest !== undefined && dest !== null;
   }, []);
 

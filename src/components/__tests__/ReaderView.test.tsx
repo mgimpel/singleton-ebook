@@ -15,9 +15,11 @@ import uiEn from "../../locales/ui.en.json";
 // Isolate ReaderView: mock useBook (we drive status/view/next/prev) and the
 // three wiring hooks (they touch a live foliate view we don't have here).
 vi.mock("../../hooks/useBook", () => ({ useBook: vi.fn() }));
+
 vi.mock("../../hooks/useReaderLocation", () => ({
   useReaderLocation: () => ({ fraction: 0, cfi: null }),
 }));
+
 vi.mock("../../hooks/useReaderSettings", () => ({
   // ReaderView now captures this return to lift the settings controller; give
   // it a valid shape so the destructure succeeds.
@@ -28,6 +30,7 @@ vi.mock("../../hooks/useReaderSettings", () => ({
     setReaderScheme: vi.fn(),
   }),
 }));
+
 vi.mock("../../hooks/useSwipeNavigation", () => ({
   useSwipeNavigation: () => undefined,
 }));
@@ -62,6 +65,7 @@ function fakeView(): { view: FoliateView; setAttribute: ReturnType<typeof vi.fn>
     setStyles: vi.fn(),
     setAttribute,
   };
+
   return { view: el as unknown as FoliateView, setAttribute };
 }
 

@@ -53,6 +53,7 @@ export default function ResponsiveOverlay({
     if (wasOpen.current && !opened) {
       returnFocusRef?.current?.focus();
     }
+
     wasOpen.current = opened;
   }, [opened, returnFocusRef]);
 

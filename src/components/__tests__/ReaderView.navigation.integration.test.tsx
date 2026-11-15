@@ -24,6 +24,7 @@ vi.mock("../../vendor/foliate-js/view.js", () => ({}));
 vi.mock("../../hooks/useReaderLocation", () => ({
   useReaderLocation: () => ({ fraction: 0, cfi: null }),
 }));
+
 vi.mock("../../hooks/useReaderSettings", () => ({
   useReaderSettings: () => ({
     fontSize: 16,
@@ -63,6 +64,7 @@ function makeView(): MockView {
     setAttribute: vi.fn(),
   };
   (el as unknown as { book: unknown }).book = { toc: [] };
+
   return el;
 }
 
@@ -87,6 +89,7 @@ beforeEach(() => {
     options?: ElementCreationOptions,
   ) => {
     if (tag === "foliate-view") return currentView as unknown as HTMLElement;
+
     return realCreate(tag, options);
   }) as typeof document.createElement);
 });
@@ -130,6 +133,7 @@ async function renderReady() {
   renderReader();
   // The view mounts into the surface asynchronously once useBook reaches ready.
   await waitFor(() => expect(currentView.isConnected).toBe(true));
+
   // The surface is the node useBook's view was appended to and useSwipeNavigation
   // bound its touch listeners to — i.e. the view's parent element.
   return currentView.parentElement as HTMLElement;

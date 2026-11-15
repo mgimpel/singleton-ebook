@@ -7,6 +7,7 @@ export const UI_LANGUAGES: readonly UI_Language[] = ["en", "fr", "es", "de"] as 
 export const DEFAULT_LANGUAGE: UI_Language = "en";
 
 function isUILanguage(value: unknown): value is UI_Language {
+  // SAFETY: widening to string[] only to call includes on a value already checked as a string.
   return typeof value === "string" && (UI_LANGUAGES as readonly string[]).includes(value);
 }
 
@@ -37,6 +38,7 @@ export function resolveLanguage(
 
   if (typeof deviceLanguage === "string") {
     const primary = deviceLanguage.toLowerCase().split(/[-_]/)[0];
+
     if (isUILanguage(primary)) {
       return primary;
     }

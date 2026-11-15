@@ -40,6 +40,7 @@ describe("ResponsiveOverlay", () => {
   test("close returns focus to returnFocusRef", async () => {
     function Harness({ opened }: { opened: boolean }) {
       const triggerRef = useRef<HTMLButtonElement>(null);
+
       return (
         <>
           <button ref={triggerRef} type="button">

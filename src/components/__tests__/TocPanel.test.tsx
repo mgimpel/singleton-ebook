@@ -121,6 +121,7 @@ describe("TocPanel", () => {
     function Harness() {
       const triggerRef = useRef<HTMLButtonElement>(null);
       const [opened, setOpened] = useState(true);
+
       return (
         <>
           <button ref={triggerRef} type="button">

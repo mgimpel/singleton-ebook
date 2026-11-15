@@ -9,6 +9,7 @@ import { READER_SCHEME_COLORS } from "../../lib/readerColorScheme";
 // A fake foliate-view exposing only the method the hook touches.
 function makeView(): { view: FoliateView; setStyles: ReturnType<typeof vi.fn> } {
   const setStyles = vi.fn();
+
   return { view: { renderer: { setStyles } }, setStyles };
 }
 
