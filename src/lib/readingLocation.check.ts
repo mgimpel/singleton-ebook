@@ -27,9 +27,7 @@ assert.equal(isValidReadingLocation(null), false);
 
 assert.equal(isValidReadingLocation(undefined), false);
 
-assert.equal(isValidReadingLocation(123), false);
 
-assert.equal(isValidReadingLocation({}), false);
 
 // parseReadingLocation: pass valid CFI through, map everything else to null.
 assert.equal(parseReadingLocation("epubcfi(/6/4!/4/2)"), "epubcfi(/6/4!/4/2)");

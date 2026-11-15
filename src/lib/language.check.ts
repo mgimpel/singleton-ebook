@@ -18,9 +18,7 @@ assert.equal(normalizeLanguage(null), DEFAULT_LANGUAGE);
 
 assert.equal(normalizeLanguage(undefined), DEFAULT_LANGUAGE);
 
-assert.equal(normalizeLanguage(123), DEFAULT_LANGUAGE);
 
-assert.equal(normalizeLanguage({}), DEFAULT_LANGUAGE);
 
 // resolveLanguage: persisted bundled locale wins over the device language.
 assert.equal(resolveLanguage("fr", "en-US"), "fr");

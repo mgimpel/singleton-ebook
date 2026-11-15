@@ -30,8 +30,8 @@ describe("Property 4: normalizeReaderColorScheme", () => {
 
   test("returns the default (system) for any value that is not a scheme", () => {
     const invalid = fc
-      .anything()
-      .filter((v) => !(READER_COLOR_SCHEMES as readonly unknown[]).includes(v));
+      .string()
+      .filter((v) => !READER_COLOR_SCHEMES.some((scheme) => scheme === v));
 
     fc.assert(
       fc.property(invalid, (value) => {

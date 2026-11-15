@@ -12,19 +12,19 @@ import ReaderThemeControl from "../ReaderThemeControl";
 import LanguageControl from "../LanguageControl";
 import { FONT_SIZE_OPTIONS } from "../../lib/fontSize";
 import { READER_COLOR_SCHEMES } from "../../lib/readerColorScheme";
-import { UI_LANGUAGES } from "../../lib/language";
+import { UI_LANGUAGES, type UI_Language } from "../../lib/language";
 import i18n from "../../i18n";
 import uiEn from "../../locales/ui.en.json";
 
 const settings = uiEn.settings;
 
 // Endonyms the Select renders (language-agnostic native names), in UI_LANGUAGES order.
-const ENDONYMS: Record<string, string> = {
+const ENDONYMS = {
   en: "English",
   fr: "Français",
   es: "Español",
   de: "Deutsch",
-};
+} satisfies Record<UI_Language, string>;
 
 function renderWithProviders(ui: React.ReactElement) {
   return render(
@@ -50,7 +50,7 @@ describe("FontSizeControl", () => {
 
     const group = screen.getByRole("radiogroup", { name: settings.fontSize });
     const options = within(group).getAllByRole("radio");
-    expect(options.map((o) => (o as HTMLInputElement).value)).toEqual(
+    expect(options.map((o) => o.getAttribute("value"))).toEqual(
       FONT_SIZE_OPTIONS.map(String),
     );
   });
@@ -78,7 +78,7 @@ describe("ReaderThemeControl", () => {
 
     const group = screen.getByRole("radiogroup");
     const options = within(group).getAllByRole("radio");
-    expect(options.map((o) => (o as HTMLInputElement).value)).toEqual([
+    expect(options.map((o) => o.getAttribute("value"))).toEqual([
       ...READER_COLOR_SCHEMES,
     ]);
 

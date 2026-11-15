@@ -58,16 +58,25 @@ export default defineConfig({
   ],
   overrides: [
     {
-      // Tests/self-checks deliberately fake foliate-js views, mock modules and
-      // feed invalid input to the parsers; typed fakes would add no safety.
-      files: ["**/__tests__/**", "**/*.check.ts", "src/test-setup.ts"],
+      // These tests deliberately fake foliate-js views and mock modules. Listed
+      // explicitly so every other test/check (incl. all of src/lib) stays fully
+      // linted — shrink this list as files are cleaned up, don't grow it.
+      files: [
+        "src/components/__tests__/AppLayout.test.tsx",
+        "src/components/__tests__/ReaderView.integration.test.tsx",
+        "src/components/__tests__/ReaderView.navigation.integration.test.tsx",
+        "src/components/__tests__/ReaderView.test.tsx",
+        "src/hooks/__tests__/useBook.test.ts",
+        "src/hooks/__tests__/useReaderLocation.test.ts",
+        "src/hooks/__tests__/useReaderSettings.test.ts",
+        "src/test-setup.ts",
+      ],
       rules: {
         "anti-slop/no-module-mocking": "off",
         "anti-slop/no-chained-type-assertions": "off",
         "anti-slop/require-safety-comment-for-type-assertion": "off",
         "anti-slop/no-runtime-typeof": "off",
         "anti-slop/no-known-value-widening": "off",
-        "anti-slop/no-unsafe-dictionary-type": "off",
       },
     },
     {

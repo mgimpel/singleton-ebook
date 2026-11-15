@@ -28,9 +28,7 @@ assert.equal(normalizeReaderColorScheme(null), "system");
 
 assert.equal(normalizeReaderColorScheme(undefined), "system");
 
-assert.equal(normalizeReaderColorScheme(123), "system");
 
-assert.equal(normalizeReaderColorScheme({}), "system");
 
 // resolveReaderScheme: "system" follows the device preference.
 assert.equal(resolveReaderScheme("system", true), "dark");

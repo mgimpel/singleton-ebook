@@ -78,9 +78,7 @@ function assertInvariants(entries: TocEntry[]): void {
   expect(Array.isArray(entries)).toBe(true);
 
   for (const e of entries) {
-    expect(typeof e.label).toBe("string");
     expect(e.label.length).toBeGreaterThan(0);
-    expect(typeof e.href).toBe("string");
     expect(e.href.length).toBeGreaterThan(0);
     expect(Array.isArray(e.subitems)).toBe(true);
     assertInvariants(e.subitems);

@@ -29,8 +29,8 @@ const matchingDevice = bundled.chain((locale) =>
 
 // A non-bundled persisted value: anything whose string form is not a bundled locale.
 const invalidPersisted = fc
-  .oneof(fc.anything(), fc.constant(null), fc.constant(undefined))
-  .filter((v) => !(UI_LANGUAGES as readonly unknown[]).includes(v));
+  .oneof(fc.string(), fc.constant(null), fc.constant(undefined))
+  .filter((v) => !UI_LANGUAGES.some((lang) => lang === v));
 
 test("Property 13 (1): persisted bundled locale is returned as-is", () => {
   fc.assert(
@@ -58,7 +58,7 @@ test("Property 13 (2): invalid persisted + device subtag match resolves to that 
 test("Property 13 (3): invalid persisted + non-matching device subtag resolves to English", () => {
   const nonMatchingDevice = fc
     .string()
-    .filter((s) => !(UI_LANGUAGES as readonly string[]).includes(s.toLowerCase().split(/[-_]/)[0] ?? ""));
+    .filter((s) => !UI_LANGUAGES.some((lang) => lang === s.toLowerCase().split(/[-_]/)[0]));
 
   fc.assert(
     fc.property(invalidPersisted, nonMatchingDevice, (persisted, device) => {

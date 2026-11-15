@@ -26,6 +26,8 @@ function readIndexHtmlCsp(): string {
 
 function readTauriConfCsp(): string {
   const raw = readFileSync(join(projectRoot, "src-tauri", "tauri.conf.json"), "utf8");
+  // SAFETY: a checked-in config file with this documented schema; optional
+  // chaining below tolerates any missing key.
   const conf = JSON.parse(raw) as { app?: { security?: { csp?: string } } };
 
   return conf.app?.security?.csp?.trim() ?? "";

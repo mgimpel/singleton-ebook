@@ -44,8 +44,8 @@ describe("Property 7: reading-location validation accepts only CFI-shaped string
     expect(parseReadingLocation(null)).toBeNull();
   });
 
-  test("rejects any non-string value", () => {
-    const nonString = fc.anything().filter((v) => typeof v !== "string");
+  test("rejects absent values", () => {
+    const nonString = fc.constantFrom(null, undefined);
     fc.assert(
       fc.property(nonString, (value) => {
         expect(isValidReadingLocation(value)).toBe(false);

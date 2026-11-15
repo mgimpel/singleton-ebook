@@ -19,13 +19,16 @@ function fakeStorage(overrides: Partial<Storage>): Storage {
     key: () => null,
     length: 0,
     ...overrides,
-  } as Storage;
+  };
 }
 
-const original = (globalThis as { localStorage?: Storage }).localStorage;
+// vite-node has no localStorage; viewing globalThis with it optional lets the
+// check install and delete a fake.
+const globals: { localStorage?: Storage } = globalThis;
+const original = globals.localStorage;
 
 function installStorage(storage: Storage): void {
-  (globalThis as { localStorage?: Storage }).localStorage = storage;
+  globals.localStorage = storage;
 }
 
 try {
@@ -68,7 +71,7 @@ try {
 } finally {
   // Tidy up: restore whatever was there (undefined under vite-node).
   if (original === undefined) {
-    delete (globalThis as { localStorage?: Storage }).localStorage;
+    delete globals.localStorage;
   } else {
     installStorage(original);
   }

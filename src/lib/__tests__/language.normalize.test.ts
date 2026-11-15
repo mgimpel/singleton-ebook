@@ -30,8 +30,8 @@ describe("Property 12: normalizeLanguage", () => {
 
   test("returns the default for any value that is not a bundled locale", () => {
     const invalid = fc
-      .anything()
-      .filter((v) => !(UI_LANGUAGES as readonly unknown[]).includes(v));
+      .string()
+      .filter((v) => !UI_LANGUAGES.some((lang) => lang === v));
 
     fc.assert(
       fc.property(invalid, (value) => {

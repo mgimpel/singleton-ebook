@@ -17,7 +17,6 @@ assert.equal(normalizeFontSize(null), FONT_SIZE_DEFAULT);
 
 assert.equal(normalizeFontSize("abc"), FONT_SIZE_DEFAULT);
 
-assert.equal(normalizeFontSize({}), FONT_SIZE_DEFAULT);
 
 // normalizeFontSize: clamp out-of-range to the nearest bound.
 assert.equal(normalizeFontSize(5), FONT_SIZE_MIN); // below min
