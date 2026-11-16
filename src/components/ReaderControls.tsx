@@ -50,6 +50,7 @@ export default function ReaderControls({
     <Group gap="xs" wrap="nowrap">
       <ActionIcon
         variant="subtle"
+        color="gray"
         size="lg"
         aria-label={t("nav.previous")}
         onClick={onPrev}
@@ -58,6 +59,7 @@ export default function ReaderControls({
       </ActionIcon>
       <ActionIcon
         variant="subtle"
+        color="gray"
         size="lg"
         aria-label={t("nav.next")}
         onClick={onNext}
@@ -67,6 +69,7 @@ export default function ReaderControls({
       <ActionIcon
         ref={tocButtonRef}
         variant="subtle"
+        color="gray"
         size="lg"
         aria-label={t("nav.openToc")}
         onClick={onOpenToc}
@@ -76,6 +79,7 @@ export default function ReaderControls({
       <ActionIcon
         ref={settingsButtonRef}
         variant="subtle"
+        color="gray"
         size="lg"
         aria-label={t("nav.openSettings")}
         onClick={onOpenSettings}
@@ -85,6 +89,7 @@ export default function ReaderControls({
       <ActionIcon
         ref={aboutButtonRef}
         variant="subtle"
+        color="gray"
         size="lg"
         aria-label={t("nav.openAbout")}
         onClick={onOpenAbout}

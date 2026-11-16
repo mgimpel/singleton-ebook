@@ -15,11 +15,13 @@
 // of its own beyond that captured controller and the overlay open flags — it
 // just wires the controller's values and callbacks into the chrome and overlays.
 
-import { useCallback, useRef, useState } from "react";
-import { Box, Group, Notification } from "@mantine/core";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Box, Group, Notification, useMantineColorScheme } from "@mantine/core";
+import { useColorScheme } from "@mantine/hooks";
 import { useTranslation } from "react-i18next";
 
 import type { SaveErrorKind } from "../lib/persistenceManager";
+import { resolveReaderScheme } from "../lib/readerColorScheme";
 import ReaderView, { type ReaderController } from "./ReaderView";
 import ReaderControls from "./ReaderControls";
 import ProgressIndicator from "./ProgressIndicator";
@@ -49,6 +51,16 @@ export default function AppLayout() {
   const handleSaveError = useCallback((kind: SaveErrorKind) => {
     setNotice(kind);
   }, []);
+
+  // Keep the Mantine chrome (bar, overlays) in step with the reader scheme as it
+  // changes; the provider's manager only supplies the initial value. Sepia = light.
+  const { setColorScheme } = useMantineColorScheme();
+  const deviceIsDark = useColorScheme() === "dark";
+  const readerScheme = controller?.readerScheme;
+  useEffect(() => {
+    if (!readerScheme) return;
+    setColorScheme(resolveReaderScheme(readerScheme, deviceIsDark) === "dark" ? "dark" : "light");
+  }, [readerScheme, deviceIsDark, setColorScheme]);
 
   const noop = () => {};
 
