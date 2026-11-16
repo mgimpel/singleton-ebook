@@ -11,6 +11,8 @@
   "nav": {
     "previous": "Page précédente",
     "next": "Page suivante",
+    "previousChapter": "Chapitre précédent",
+    "nextChapter": "Chapitre suivant",
     "openToc": "Table des matières",
     "openSettings": "Paramètres",
     "openAbout": "À propos de cette application"

@@ -37,7 +37,7 @@ export interface FoliateView extends HTMLElement {
   book?: { toc?: readonly RawTocItem[] };
   // The renderer is a real element (<foliate-paginator>): setStyles injects the
   // user stylesheet, and flow/gap/etc. are plain attributes read off it.
-  renderer?: { setStyles(css: string): void; setAttribute(name: string, value: string): void };
+  renderer?: { setStyles(css: string): void; nextSection(): Promise<void>; prevSection(): Promise<void>; setAttribute(name: string, value: string): void };
 }
 
 export interface UseBookResult {
@@ -48,6 +48,8 @@ export interface UseBookResult {
   // instance methods, so destructuring them must not trip unbound-method.
   next: () => void;
   prev: () => void;
+  nextChapter: () => void;
+  prevChapter: () => void;
   goTo: (target: string | number) => Promise<boolean>;
 }
 
@@ -183,11 +185,19 @@ export function useBook(container: HTMLElement | null): UseBookResult {
     void viewRef.current?.goLeft();
   }, []);
 
+  const nextChapter = useCallback(() => {
+    void viewRef.current?.renderer?.nextSection();
+  }, []);
+
+  const prevChapter = useCallback(() => {
+    void viewRef.current?.renderer?.prevSection();
+  }, []);
+
   const goTo = useCallback(async (target: string | number): Promise<boolean> => {
     const dest = await viewRef.current?.goTo(target);
 
     return dest !== undefined && dest !== null;
   }, []);
 
-  return { status, view, toc, next, prev, goTo };
+  return { status, view, toc, next, prev, nextChapter, prevChapter, goTo };
 }

@@ -44,6 +44,8 @@ export interface ReaderController {
   toc: TocEntry[];
   next: () => void;
   prev: () => void;
+  nextChapter: () => void;
+  prevChapter: () => void;
   goTo: (target: string | number) => Promise<boolean>;
   fraction: number;
   fontSize: number;
@@ -69,7 +71,7 @@ export default function ReaderView({ onSaveError, onController }: ReaderViewProp
   // useBook mounts the <foliate-view> into this surface before opening the book
   // so foliate-js lays out against a real, sized box (a detached element
   // renders zero pages — the book text never paints). It owns mount + cleanup.
-  const { status, view, toc, next, prev, goTo } = useBook(surface);
+  const { status, view, toc, next, prev, nextChapter, prevChapter, goTo } = useBook(surface);
 
   const { fraction } = useReaderLocation(view, onSaveError);
 
@@ -101,6 +103,8 @@ export default function ReaderView({ onSaveError, onController }: ReaderViewProp
       toc,
       next,
       prev,
+      nextChapter,
+      prevChapter,
       goTo,
       fraction,
       fontSize,
@@ -114,6 +118,8 @@ export default function ReaderView({ onSaveError, onController }: ReaderViewProp
     toc,
     next,
     prev,
+    nextChapter,
+    prevChapter,
     goTo,
     fraction,
     fontSize,

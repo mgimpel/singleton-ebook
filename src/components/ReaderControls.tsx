@@ -13,6 +13,8 @@ import { ActionIcon, Group } from "@mantine/core";
 import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faAnglesLeft,
+  faAnglesRight,
   faChevronLeft,
   faChevronRight,
   faCircleInfo,
@@ -23,6 +25,8 @@ import {
 interface ReaderControlsProps {
   onPrev: () => void;
   onNext: () => void;
+  onPrevChapter: () => void;
+  onNextChapter: () => void;
   onOpenToc: () => void;
   onOpenSettings: () => void;
   onOpenAbout: () => void;
@@ -37,6 +41,8 @@ interface ReaderControlsProps {
 export default function ReaderControls({
   onPrev,
   onNext,
+  onPrevChapter,
+  onNextChapter,
   onOpenToc,
   onOpenSettings,
   onOpenAbout,
@@ -48,6 +54,9 @@ export default function ReaderControls({
 
   return (
     <Group gap="xs" wrap="nowrap">
+      <ActionIcon variant="subtle" color="gray" size="lg" aria-label={t("nav.previousChapter")} onClick={onPrevChapter}>
+        <FontAwesomeIcon icon={faAnglesLeft} />
+      </ActionIcon>
       <ActionIcon
         variant="subtle"
         color="gray"
@@ -65,6 +74,9 @@ export default function ReaderControls({
         onClick={onNext}
       >
         <FontAwesomeIcon icon={faChevronRight} />
+      </ActionIcon>
+      <ActionIcon variant="subtle" color="gray" size="lg" aria-label={t("nav.nextChapter")} onClick={onNextChapter}>
+        <FontAwesomeIcon icon={faAnglesRight} />
       </ActionIcon>
       <ActionIcon
         ref={tocButtonRef}

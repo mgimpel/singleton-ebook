@@ -73,6 +73,8 @@ export default function AppLayout() {
           <ReaderControls
             onPrev={controller?.prev ?? noop}
             onNext={controller?.next ?? noop}
+            onPrevChapter={controller?.prevChapter ?? noop}
+            onNextChapter={controller?.nextChapter ?? noop}
             onOpenToc={() => setTocOpened(true)}
             onOpenSettings={() => setSettingsOpened(true)}
             onOpenAbout={() => setAboutOpened(true)}

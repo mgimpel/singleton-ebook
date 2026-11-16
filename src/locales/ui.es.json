@@ -11,6 +11,8 @@
   "nav": {
     "previous": "Página anterior",
     "next": "Página siguiente",
+    "previousChapter": "Capítulo anterior",
+    "nextChapter": "Capítulo siguiente",
     "openToc": "Índice",
     "openSettings": "Ajustes",
     "openAbout": "Acerca de esta aplicación"
