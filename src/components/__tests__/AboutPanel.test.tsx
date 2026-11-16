@@ -1,0 +1,126 @@
+// Copyright (C) 2026 Marc Gimpel.
+// This file is part of the Singleton Ebook project
+// (https://github.com/mgimpel/singleton-ebook).
+// SPDX-License-Identifier: BSD-3-Clause
+
+// Component tests for AboutPanel: it renders its title, copyright, license and
+// the single-sourced version when opened, and returns focus to the trigger on
+// close. Expected strings are read from the locale JSON (not hardcoded) and the
+// version is sourced from package.json so it can't rot.
+
+import { createRef } from "react";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { render, screen, cleanup, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { MantineProvider } from "@mantine/core";
+import type { InvokeArgs } from "@tauri-apps/api/core";
+import { clearMocks, mockIPC } from "@tauri-apps/api/mocks";
+// Initialise the shared i18next instance so useTranslation resolves English.
+import "../../i18n";
+import AboutPanel from "../AboutPanel";
+import enUi from "../../locales/ui.en.json";
+import pkg from "../../../package.json";
+
+// In jsdom there's no Tauri backend, so route the plugin's IPC through Tauri's
+// own test seam (mockIPC) and record the calls. That lets us assert the anchor
+// click hands the URL to the opener plugin rather than letting the webview
+// navigate, without replacing any module.
+interface IpcCall {
+  cmd: string;
+  payload: InvokeArgs | undefined;
+}
+
+let ipcCalls: IpcCall[] = [];
+
+beforeEach(() => {
+  ipcCalls = [];
+  mockIPC((cmd, payload) => {
+    ipcCalls.push({ cmd, payload });
+  });
+});
+
+afterEach(() => {
+  cleanup();
+  clearMocks();
+});
+
+type AboutProps = Parameters<typeof AboutPanel>[0];
+
+function aboutUi(props: AboutProps) {
+  return (
+    <MantineProvider env="test">
+      <AboutPanel {...props} />
+    </MantineProvider>
+  );
+}
+
+function renderAbout(props: Partial<AboutProps> = {}) {
+  const full: AboutProps = {
+    opened: props.opened ?? true,
+    onClose: props.onClose ?? vi.fn(),
+    returnFocusRef: props.returnFocusRef ?? createRef<HTMLButtonElement>(),
+  };
+
+  const { rerender } = render(aboutUi(full));
+
+  return {
+    ...full,
+    rerender: (next: Partial<AboutProps>) => rerender(aboutUi({ ...full, ...next })),
+  };
+}
+
+describe("AboutPanel", () => {
+  it("renders title, copyright and license when opened", () => {
+    renderAbout();
+    expect(
+      screen.getByRole("heading", { name: enUi.about.title }),
+    ).toBeInTheDocument();
+    expect(screen.getByText(enUi.about.copyright)).toBeInTheDocument();
+    expect(screen.getByText(enUi.about.license)).toBeInTheDocument();
+    // thanksBody is multi-line (rendered with white-space: pre-line); Testing
+    // Library's default matcher collapses the node's whitespace, so match the
+    // expected string under the same normalization rather than its raw \n form.
+    const normalizedThanks = enUi.about.thanksBody.replace(/\s+/g, " ").trim();
+    expect(screen.getByText(normalizedThanks)).toBeInTheDocument();
+  });
+
+  it("shows the version single-sourced from package.json", () => {
+    renderAbout();
+    const expected = enUi.about.version.replace("{{version}}", pkg.version);
+    expect(screen.getByText(expected)).toBeInTheDocument();
+  });
+
+  it("opens links in the external browser instead of navigating the app", async () => {
+    const user = userEvent.setup();
+    renderAbout();
+    const licenseLink = screen.getByRole("link", { name: enUi.about.license });
+    await user.click(licenseLink);
+    expect(ipcCalls).toHaveLength(1);
+    expect(ipcCalls[0]?.cmd).toBe("plugin:opener|open_url");
+    expect(ipcCalls[0]?.payload).toMatchObject({
+      url: licenseLink.getAttribute("href"),
+    });
+  });
+
+  it("does not render content when closed", () => {
+    renderAbout({ opened: false });
+    expect(
+      screen.queryByRole("heading", { name: enUi.about.title }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("returns focus to the trigger on close", async () => {
+    const user = userEvent.setup();
+    const trigger = document.createElement("button");
+    document.body.appendChild(trigger);
+    const onClose = vi.fn();
+    const { rerender } = renderAbout({ onClose, returnFocusRef: { current: trigger } });
+    await user.click(screen.getByRole("button", { name: enUi.common.close }));
+    expect(onClose).toHaveBeenCalledTimes(1);
+    // ResponsiveOverlay restores focus on the open -> closed transition, which
+    // the parent drives in response to onClose.
+    rerender({ opened: false });
+    await waitFor(() => expect(document.activeElement).toBe(trigger));
+    trigger.remove();
+  });
+});
