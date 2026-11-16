@@ -18,6 +18,9 @@
     "lint:fix": "oxlint --fix"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "7.3.1",
+    "@fortawesome/free-solid-svg-icons": "7.3.1",
+    "@fortawesome/react-fontawesome": "3.5.0",
     "@mantine/hooks": "9.8.0",
     "@tauri-apps/api": "2.12.4",
     "@tauri-apps/plugin-opener": "2.7.3",
@@ -28,6 +31,7 @@
   },
   "devDependencies": {
     "@mantine/core": "9.8.0",
+    "@oxlint/plugins": "1.93.0",
     "@tauri-apps/cli": "2.12.4",
     "@tauri-apps/plugin-os": "2.4.0",
     "@testing-library/jest-dom": "7.0.1",
@@ -40,7 +44,6 @@
     "jsdom": "31.0.1",
     "oxlint": "1.93.0",
     "oxlint-tsgolint": "7.0.2006",
-    "@oxlint/plugins": "1.93.0",
     "postcss": "8.5.32",
     "typescript": "7.0.2",
     "vite": "8.3.8",

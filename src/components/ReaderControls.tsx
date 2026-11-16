@@ -5,11 +5,20 @@
 
 // The reader control bar: a Group of ActionIcon buttons for page navigation
 // (prev/next) and opening the TOC, settings and about overlays. Each button's
-// accessible name comes from i18n (the glyph child is decorative). The project
-// ships no icon library (Mantine 9.8.0 only), so the glyphs are plain unicode.
+// accessible name comes from i18n; the Font Awesome icons are decorative
+// (FontAwesomeIcon sets aria-hidden). Icons are imported individually so only
+// these five are bundled.
 
 import { ActionIcon, Group } from "@mantine/core";
 import { useTranslation } from "react-i18next";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronLeft,
+  faChevronRight,
+  faCircleInfo,
+  faGear,
+  faList,
+} from "@fortawesome/free-solid-svg-icons";
 
 interface ReaderControlsProps {
   onPrev: () => void;
@@ -45,7 +54,7 @@ export default function ReaderControls({
         aria-label={t("nav.previous")}
         onClick={onPrev}
       >
-        <span aria-hidden="true">‹</span>
+        <FontAwesomeIcon icon={faChevronLeft} />
       </ActionIcon>
       <ActionIcon
         variant="subtle"
@@ -53,7 +62,7 @@ export default function ReaderControls({
         aria-label={t("nav.next")}
         onClick={onNext}
       >
-        <span aria-hidden="true">›</span>
+        <FontAwesomeIcon icon={faChevronRight} />
       </ActionIcon>
       <ActionIcon
         ref={tocButtonRef}
@@ -62,7 +71,7 @@ export default function ReaderControls({
         aria-label={t("nav.openToc")}
         onClick={onOpenToc}
       >
-        <span aria-hidden="true">☰</span>
+        <FontAwesomeIcon icon={faList} />
       </ActionIcon>
       <ActionIcon
         ref={settingsButtonRef}
@@ -71,7 +80,7 @@ export default function ReaderControls({
         aria-label={t("nav.openSettings")}
         onClick={onOpenSettings}
       >
-        <span aria-hidden="true">⚙</span>
+        <FontAwesomeIcon icon={faGear} />
       </ActionIcon>
       <ActionIcon
         ref={aboutButtonRef}
@@ -80,7 +89,7 @@ export default function ReaderControls({
         aria-label={t("nav.openAbout")}
         onClick={onOpenAbout}
       >
-        <span aria-hidden="true">ⓘ</span>
+        <FontAwesomeIcon icon={faCircleInfo} />
       </ActionIcon>
     </Group>
   );
