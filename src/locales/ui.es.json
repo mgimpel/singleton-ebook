@@ -12,7 +12,8 @@
     "previous": "Página anterior",
     "next": "Página siguiente",
     "openToc": "Índice",
-    "openSettings": "Ajustes"
+    "openSettings": "Ajustes",
+    "openAbout": "Acerca de esta aplicación"
   },
   "settings": {
     "title": "Ajustes",
@@ -32,5 +33,19 @@
   "common": {
     "close": "Cerrar",
     "dismiss": "Descartar"
+  },
+  "app": {
+    "title": "Singleton Ebook"
+  },
+  "about": {
+    "title": "Acerca de",
+    "version": "Versión {{version}}",
+    "buildDetails": "Compilación {{commit}} ({{date}})",
+    "copyright": "Copyright © 2026 Marc Gimpel. Todos los derechos reservados.",
+    "licensePrefix": "Licencia:",
+    "license": "Licencia BSD de 3 cláusulas",
+    "homepage": "Página del proyecto:",
+    "thanksHeading": "Agradecimientos",
+    "thanksBody": "Creado con Tauri, React y Mantine.\nRenderizado del libro con foliate-js (licencia MIT)."
   }
 }

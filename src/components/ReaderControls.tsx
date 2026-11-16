@@ -4,7 +4,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 // The reader control bar: a Group of ActionIcon buttons for page navigation
-// (prev/next) and opening the TOC and settings overlays. Each button's
+// (prev/next) and opening the TOC, settings and about overlays. Each button's
 // accessible name comes from i18n (the glyph child is decorative). The project
 // ships no icon library (Mantine 9.8.0 only), so the glyphs are plain unicode.
 
@@ -16,10 +16,13 @@ interface ReaderControlsProps {
   onNext: () => void;
   onOpenToc: () => void;
   onOpenSettings: () => void;
+  onOpenAbout: () => void;
   /** So the TOC overlay can return focus to its trigger on close. */
   tocButtonRef?: React.Ref<HTMLButtonElement>;
   /** So the Settings overlay can return focus to its trigger on close. */
   settingsButtonRef?: React.Ref<HTMLButtonElement>;
+  /** So the About overlay can return focus to its trigger on close. */
+  aboutButtonRef?: React.Ref<HTMLButtonElement>;
 }
 
 export default function ReaderControls({
@@ -27,8 +30,10 @@ export default function ReaderControls({
   onNext,
   onOpenToc,
   onOpenSettings,
+  onOpenAbout,
   tocButtonRef,
   settingsButtonRef,
+  aboutButtonRef,
 }: ReaderControlsProps) {
   const { t } = useTranslation("ui");
 
@@ -67,6 +72,15 @@ export default function ReaderControls({
         onClick={onOpenSettings}
       >
         <span aria-hidden="true">⚙</span>
+      </ActionIcon>
+      <ActionIcon
+        ref={aboutButtonRef}
+        variant="subtle"
+        size="lg"
+        aria-label={t("nav.openAbout")}
+        onClick={onOpenAbout}
+      >
+        <span aria-hidden="true">ⓘ</span>
       </ActionIcon>
     </Group>
   );

@@ -25,6 +25,7 @@ import ReaderControls from "./ReaderControls";
 import ProgressIndicator from "./ProgressIndicator";
 import TocPanel from "./TocPanel";
 import SettingsPanel from "./SettingsPanel";
+import AboutPanel from "./AboutPanel";
 import classes from "./AppLayout.module.css";
 
 export default function AppLayout() {
@@ -36,8 +37,10 @@ export default function AppLayout() {
   // Overlay open flags and the trigger refs the overlays return focus to.
   const [tocOpened, setTocOpened] = useState(false);
   const [settingsOpened, setSettingsOpened] = useState(false);
+  const [aboutOpened, setAboutOpened] = useState(false);
   const tocButtonRef = useRef<HTMLButtonElement>(null);
   const settingsButtonRef = useRef<HTMLButtonElement>(null);
+  const aboutButtonRef = useRef<HTMLButtonElement>(null);
 
   // One notice at a time: the latest save failure wins. Null = nothing shown.
   const [notice, setNotice] = useState<SaveErrorKind | null>(null);
@@ -60,8 +63,10 @@ export default function AppLayout() {
             onNext={controller?.next ?? noop}
             onOpenToc={() => setTocOpened(true)}
             onOpenSettings={() => setSettingsOpened(true)}
+            onOpenAbout={() => setAboutOpened(true)}
             tocButtonRef={tocButtonRef}
             settingsButtonRef={settingsButtonRef}
+            aboutButtonRef={aboutButtonRef}
           />
           <Box flex={1}>
             <ProgressIndicator fraction={controller?.fraction ?? 0} />
@@ -86,6 +91,12 @@ export default function AppLayout() {
         onReaderSchemeChange={controller?.setReaderScheme ?? noop}
         onSaveError={handleSaveError}
         returnFocusRef={settingsButtonRef}
+      />
+
+      <AboutPanel
+        opened={aboutOpened}
+        onClose={() => setAboutOpened(false)}
+        returnFocusRef={aboutButtonRef}
       />
 
       {notice !== null && (
