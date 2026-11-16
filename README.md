@@ -42,7 +42,7 @@ pnpm tauri build # to build
 ```
 
 [badge-license]: https://img.shields.io/github/license/mgimpel/singleton-ebook?color=blue
-[badge-platforms]: https://img.shields.io/badge/platforms-macOS%2C%20Windows%2C%20Linux%2C%20Android%2C%20iOS%2C%20Web%2C%20PWA-green
+[badge-platforms]: https://img.shields.io/badge/platforms-macOS%2C%20Windows%2C%20Linux%2C%20Android%2C%20iOS%2C%20Web-green
 [badge-pnpm]: https://img.shields.io/badge/pnpm-%E2%89%A512-F69220?logo=pnpm&logoColor=white
 [badge-node]: https://img.shields.io/node/v/vite?logo=nodedotjs&logoColor=white
 [badge-tauri]: https://img.shields.io/badge/tauri-%E2%89%A52-blue?logo=tauri&logoColor=white
@@ -50,7 +50,7 @@ pnpm tauri build # to build
 [badge-react]: https://img.shields.io/badge/react-%E2%89%A519.3-blue?logo=react&logoColor=white
 [badge-mantine]: https://img.shields.io/badge/mantine-%E2%89%A59.8-blue?logo=mantine&logoColor=white
 [link-license]: https://github.com/mgimpel/singleton-ebook?tab=BSD-3-Clause-1-ov-file
-[link-website]: [http](https://github.com/mgimpel/singleton-ebook)
+[link-website]: https://github.com/mgimpel/singleton-ebook
 [link-pnpm]: https://pnpm.io/
 [link-node]: https://nodejs.org/en/about/previous-releases
 [link-tauri]: https://tauri.app/

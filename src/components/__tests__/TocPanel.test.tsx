@@ -69,7 +69,7 @@ describe("TocPanel", () => {
     expect(document.getElementById(regionId!)).toContainElement(scene);
   });
 
-  test("selecting a resolvable entry navigates and closes", async () => {
+  test("selecting a resolvable entry navigates and stays open", async () => {
     const user = userEvent.setup();
     const goTo = vi.fn().mockResolvedValue(true);
     const onClose = vi.fn();
@@ -80,7 +80,7 @@ describe("TocPanel", () => {
     await user.click(screen.getByText("Act II"));
 
     await waitFor(() => expect(goTo).toHaveBeenCalledWith("a2"));
-    await waitFor(() => expect(onClose).toHaveBeenCalledTimes(1));
+    expect(onClose).not.toHaveBeenCalled();
   });
 
   test("an unresolvable destination stays open and shows a message", async () => {
@@ -141,8 +141,7 @@ describe("TocPanel", () => {
     renderPanel(<Harness />);
     const trigger = screen.getByRole("button", { name: "trigger" });
 
-    // Selecting a resolvable entry closes the overlay, which returns focus.
-    await user.click(screen.getByText("Act II"));
+    await user.click(screen.getByRole("button", { name: closeLabel }));
 
     await waitFor(() => expect(document.activeElement).toBe(trigger));
   });

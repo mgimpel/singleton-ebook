@@ -41,6 +41,8 @@ function TocEntries({
     <NavLink
       key={`${entry.href}-${index}`}
       label={entry.label}
+      opened
+      py={2}
       onClick={() => onSelect(entry.href)}
     >
       {entry.subitems.length > 0 && (
@@ -70,11 +72,7 @@ export default function TocPanel({
   const handleSelect = async (href: string) => {
     const resolved = await goTo(href);
 
-    if (resolved) {
-      handleClose();
-    } else {
-      setUnavailable(true);
-    }
+    setUnavailable(!resolved);
   };
 
   return (

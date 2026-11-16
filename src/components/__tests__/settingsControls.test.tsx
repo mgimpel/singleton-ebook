@@ -7,9 +7,11 @@ import userEvent from "@testing-library/user-event";
 import { MantineProvider } from "@mantine/core";
 import { I18nextProvider } from "react-i18next";
 
-import FontSizeControl from "../FontSizeControl";
-import ReaderThemeControl from "../ReaderThemeControl";
-import LanguageControl from "../LanguageControl";
+import {
+  FontSizeControl,
+  LanguageControl,
+  ReaderThemeControl,
+} from "../SettingsPanel";
 import { FONT_SIZE_OPTIONS } from "../../lib/fontSize";
 import { READER_COLOR_SCHEMES } from "../../lib/readerColorScheme";
 import { UI_LANGUAGES, type UI_Language } from "../../lib/language";

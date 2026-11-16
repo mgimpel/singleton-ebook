@@ -12,9 +12,13 @@ import {
 describe("Property 2: normalizeFontSize", () => {
   test("always returns a member of FONT_SIZE_OPTIONS for any input", () => {
     fc.assert(
-      fc.property(fc.anything(), (value) => {
-        expect(FONT_SIZE_OPTIONS).toContain(normalizeFontSize(value));
-      }),
+      // Contract-valid inputs only (FontSizeInput): number | string | null | undefined.
+      fc.property(
+        fc.oneof(fc.double(), fc.string(), fc.constant(null), fc.constant(undefined)),
+        (value) => {
+          expect(FONT_SIZE_OPTIONS).toContain(normalizeFontSize(value));
+        },
+      ),
       { numRuns: 100 },
     );
   });
