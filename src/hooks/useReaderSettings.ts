@@ -1,3 +1,8 @@
+// Copyright (C) 2026 Marc Gimpel.
+// This file is part of the Singleton Ebook project
+// (https://github.com/mgimpel/singleton-ebook).
+// SPDX-License-Identifier: BSD-3-Clause
+
 // Holds the reader's font size and color scheme, applies them to the live
 // foliate-view as a user stylesheet, persists changes, and resolves initial
 // values from persistence on mount. While the scheme is "system" it watches

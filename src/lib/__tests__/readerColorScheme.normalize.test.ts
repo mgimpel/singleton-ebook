@@ -1,3 +1,8 @@
+// Copyright (C) 2026 Marc Gimpel.
+// This file is part of the Singleton Ebook project
+// (https://github.com/mgimpel/singleton-ebook).
+// SPDX-License-Identifier: BSD-3-Clause
+
 // Feature: epub-reader, Property 4: Reader color scheme normalization is total, identity on valid, default on invalid
 import { describe, test, expect } from "vitest";
 import fc from "fast-check";

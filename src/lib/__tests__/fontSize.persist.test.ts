@@ -1,3 +1,8 @@
+// Copyright (C) 2026 Marc Gimpel.
+// This file is part of the Singleton Ebook project
+// (https://github.com/mgimpel/singleton-ebook).
+// SPDX-License-Identifier: BSD-3-Clause
+
 // Feature: epub-reader, Property 3: Font size persistence round-trips
 // Validates: Requirements 4.5, 4.6, 7.1, 7.2
 import { describe, test, expect, vi } from "vitest";

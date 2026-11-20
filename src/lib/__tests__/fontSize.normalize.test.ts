@@ -1,3 +1,8 @@
+// Copyright (C) 2026 Marc Gimpel.
+// This file is part of the Singleton Ebook project
+// (https://github.com/mgimpel/singleton-ebook).
+// SPDX-License-Identifier: BSD-3-Clause
+
 // Feature: epub-reader, Property 2: Font size is always a valid bounded step and clamps out-of-range to the nearest bound
 import { describe, test, expect } from "vitest";
 import fc from "fast-check";

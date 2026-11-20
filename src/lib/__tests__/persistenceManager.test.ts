@@ -1,3 +1,8 @@
+// Copyright (C) 2026 Marc Gimpel.
+// This file is part of the Singleton Ebook project
+// (https://github.com/mgimpel/singleton-ebook).
+// SPDX-License-Identifier: BSD-3-Clause
+
 // Feature: epub-reader, Property 14: UI language persistence round-trips
 // Validates: Requirements 8.3, 8.4
 import { describe, test, expect, vi } from "vitest";

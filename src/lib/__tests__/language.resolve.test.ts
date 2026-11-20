@@ -1,3 +1,8 @@
+// Copyright (C) 2026 Marc Gimpel.
+// This file is part of the Singleton Ebook project
+// (https://github.com/mgimpel/singleton-ebook).
+// SPDX-License-Identifier: BSD-3-Clause
+
 // Feature: epub-reader, Property 13: UI language resolution follows persisted → device subtag → English precedence
 // Validates: Requirements 8.4, 8.5, 8.6, 8.7
 import { test, expect } from "vitest";

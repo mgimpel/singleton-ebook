@@ -1,3 +1,8 @@
+// Copyright (C) 2026 Marc Gimpel.
+// This file is part of the Singleton Ebook project
+// (https://github.com/mgimpel/singleton-ebook).
+// SPDX-License-Identifier: BSD-3-Clause
+
 // Framework-agnostic swipe-gesture classification. No framework imports.
 
 export type SwipeDirection = "next" | "prev" | "none";

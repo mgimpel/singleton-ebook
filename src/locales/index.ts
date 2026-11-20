@@ -1,3 +1,8 @@
+// Copyright (C) 2026 Marc Gimpel.
+// This file is part of the Singleton Ebook project
+// (https://github.com/mgimpel/singleton-ebook).
+// SPDX-License-Identifier: BSD-3-Clause
+
 // i18n resources, bundled (not fetched). One flat file per namespace per
 // locale, named `ui.<xx>.json`. Keys use i18next's default nested-object
 // resolution (keySeparator "."), so a lookup like "common.close" resolves

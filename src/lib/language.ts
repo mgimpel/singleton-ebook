@@ -1,3 +1,8 @@
+// Copyright (C) 2026 Marc Gimpel.
+// This file is part of the Singleton Ebook project
+// (https://github.com/mgimpel/singleton-ebook).
+// SPDX-License-Identifier: BSD-3-Clause
+
 // Framework-agnostic UI language logic. No framework imports.
 
 export type UI_Language = "en" | "fr" | "es" | "de";

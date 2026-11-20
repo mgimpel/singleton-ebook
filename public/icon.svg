@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright (C) 2026 Marc Gimpel.
-This file is part of the Singleton Ebook project (https://github.com/mgimpel/singleton-ebook).
+Logo for https://github.com/mgimpel/singleton-ebook
 SPDX-License-Identifier: CC-BY-SA-4.0
-This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License.
-To view a copy of this license, visit https://creativecommons.org/licenses/by-sa/4.0/
 -->
 <svg id="bookicon" width="320" height="320" viewBox="0 0 80 80"
   version="1.1" xmlns="http://www.w3.org/2000/svg">
   <g id="book" style="stroke:#404040;stroke-width:2;stroke-linejoin:round;stroke-linecap:round">
-    <path id="cover" fill="sienna" d="M 22 1 h 42 q 2 0 2 2 v 56 q 0 2 -2 2 h -42 z"/>
-    <path id="spine" fill="brown" d="M 14 7 q 0 -6 6 -6 h 2 v 60 h -2 q -6 0 -6 6 z"/>
-    <path id="pages" fill="beige" d="M 20 73 q -6 0 -6 -6 q 0 -6 6 -6 h 44 q -6 0 -6 6 q 0 6 6 6 z M 66 59 q 0 2 -2 2 q -6 0 -6 6 q 0 6 6 6 q 2 0 2 -2 z"/>
-    <path id="bmark" fill="red" d="M 25 79 v -12 h 10 v 12 l -5 -5 z"/>
-    <path id="label" fill="white" d="M 30 12 h 28 v 14 h -28 z"/>
-    <path id="split" d="M 20 67 h 38"/>
+    <path id="cover" fill="sienna" d="M22 1h42q2 0 2 2v56q0 2-2 2H22z"/>
+    <path id="spine" fill="brown" d="M14 7q0-6 6-6h2v60h-2q-6 0-6 6z"/>
+    <path id="pages" fill="beige" d="M20 73q-6 0-6-6t6-6h44q-6 0-6 6t6 6zm46-14q0 2-2 2-6 0-6 6t6 6q2 0 2-2z"/>
+    <path id="bmark" fill="red" d="M25 79V67h10v12l-5-5z"/>
+    <path id="label" fill="white" d="M30 12h28v14H30z"/>
+    <path id="split" d="M20 67h38"/>
   </g>
 </svg>

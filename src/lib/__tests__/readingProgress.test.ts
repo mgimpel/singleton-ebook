@@ -1,3 +1,8 @@
+// Copyright (C) 2026 Marc Gimpel.
+// This file is part of the Singleton Ebook project
+// (https://github.com/mgimpel/singleton-ebook).
+// SPDX-License-Identifier: BSD-3-Clause
+
 // Feature: epub-reader, Property 9: Reading progress is clamped to [0,1] and formatted within 0–100%
 // Validates: Requirements 6.3
 import { describe, test, expect } from "vitest";

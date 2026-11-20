@@ -1,3 +1,8 @@
+/* Copyright (C) 2026 Marc Gimpel.
+ * This file is part of the Singleton Ebook project
+ * (https://github.com/mgimpel/singleton-ebook).
+ * SPDX-License-Identifier: BSD-3-Clause
+*/
 /* Full-bleed reader surface: fills the area AppLayout gives it and hosts the
    live <foliate-view>. The loading/error states center their content over the
    same surface so the layout never jumps between states. */

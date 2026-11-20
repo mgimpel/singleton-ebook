@@ -1,3 +1,8 @@
+/* Copyright (C) 2026 Marc Gimpel.
+ * This file is part of the Singleton Ebook project
+ * (https://github.com/mgimpel/singleton-ebook).
+ * SPDX-License-Identifier: BSD-3-Clause
+*/
 /* The reader page fills the whole viewport, mobile-first: the ReaderView takes
    all remaining space, with a compact controls+progress bar pinned below it.
    Using 100dvh (not vh) so mobile browser chrome doesn't clip the bar. */

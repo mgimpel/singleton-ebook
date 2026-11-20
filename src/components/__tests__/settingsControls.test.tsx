@@ -1,3 +1,8 @@
+// Copyright (C) 2026 Marc Gimpel.
+// This file is part of the Singleton Ebook project
+// (https://github.com/mgimpel/singleton-ebook).
+// SPDX-License-Identifier: BSD-3-Clause
+
 // Component tests for the three settings controls: FontSizeControl,
 // ReaderThemeControl, and LanguageControl.
 // Validates: Requirements 4.1, 4.2, 5.1, 5.2, 5.3, 8.1, 8.2, 8.4, 8.6, 8.7, 8.8

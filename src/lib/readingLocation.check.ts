@@ -1,3 +1,8 @@
+// Copyright (C) 2026 Marc Gimpel.
+// This file is part of the Singleton Ebook project
+// (https://github.com/mgimpel/singleton-ebook).
+// SPDX-License-Identifier: BSD-3-Clause
+
 // Standalone self-check for the reading-location pure module. Runs under
 // `pnpm check` (vite-node auto-globs src/**/*.check.ts), independent of Vitest.
 // Validates: Requirements 6.4 (CFI shape validation + storage round-trip).

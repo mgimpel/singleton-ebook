@@ -1,3 +1,8 @@
+// Copyright (C) 2026 Marc Gimpel.
+// This file is part of the Singleton Ebook project
+// (https://github.com/mgimpel/singleton-ebook).
+// SPDX-License-Identifier: BSD-3-Clause
+
 // useBook — loads and parses the bundled EPUB with a 10s timeout, dynamically
 // importing the vendored foliate-js view module. Owns the <foliate-view>
 // element; restores the persisted reading location and applies the initial

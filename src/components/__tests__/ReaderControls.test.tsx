@@ -1,3 +1,8 @@
+// Copyright (C) 2026 Marc Gimpel.
+// This file is part of the Singleton Ebook project
+// (https://github.com/mgimpel/singleton-ebook).
+// SPDX-License-Identifier: BSD-3-Clause
+
 // Component tests for ReaderControls.
 // Validates: Requirements 2.2, 2.3, 3.1
 import { describe, expect, it, vi } from "vitest";

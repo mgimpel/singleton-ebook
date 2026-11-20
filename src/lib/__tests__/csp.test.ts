@@ -1,3 +1,8 @@
+// Copyright (C) 2026 Marc Gimpel.
+// This file is part of the Singleton Ebook project
+// (https://github.com/mgimpel/singleton-ebook).
+// SPDX-License-Identifier: BSD-3-Clause
+
 // Feature: epub-reader, Requirement 1.8: the CSP blocks all scripts except the
 // application origin. The policy is declared in two places that must stay in
 // sync: index.html's <meta> CSP and tauri.conf.json's app.security.csp. This is

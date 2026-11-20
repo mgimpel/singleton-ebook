@@ -1,3 +1,8 @@
+// Copyright (C) 2026 Marc Gimpel.
+// This file is part of the Singleton Ebook project
+// (https://github.com/mgimpel/singleton-ebook).
+// SPDX-License-Identifier: BSD-3-Clause
+
 // Subscribes to the foliate view's `relocate` event, holds the latest
 // { fraction, cfi } for the ProgressIndicator (Req 6.3), and persists the CFI
 // through a coalescing writer (at most one write per second — Req 6.1) backed

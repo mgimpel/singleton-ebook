@@ -1,3 +1,8 @@
+// Copyright (C) 2026 Marc Gimpel.
+// This file is part of the Singleton Ebook project
+// (https://github.com/mgimpel/singleton-ebook).
+// SPDX-License-Identifier: BSD-3-Clause
+
 // Synchronous i18next bootstrap from bundled resources. Imported for side
 // effects before the first render (in main.tsx). The initial UI language is
 // resolved at startup: persisted value -> device primary-subtag match ->

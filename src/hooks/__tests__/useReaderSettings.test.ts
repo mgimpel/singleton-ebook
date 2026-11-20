@@ -1,3 +1,8 @@
+// Copyright (C) 2026 Marc Gimpel.
+// This file is part of the Singleton Ebook project
+// (https://github.com/mgimpel/singleton-ebook).
+// SPDX-License-Identifier: BSD-3-Clause
+
 // Unit tests for useReaderSettings.
 // Validates: Requirements 4.2, 5.2, 5.4, 5.5, 5.9, 7.3, 7.4
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
